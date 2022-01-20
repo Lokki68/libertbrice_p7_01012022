@@ -25,11 +25,11 @@ const errorHandler = (error) => {
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' require elevated privileges.');
-      proces.exit(1);
+      process.exit(1);
       break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
-      proces.exit(1);
+      process.exit(1);
       break;
     default:
       throw error;

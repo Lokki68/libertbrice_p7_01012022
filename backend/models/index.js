@@ -24,7 +24,7 @@ db.comments = require('./Comment')(sequelize, Sequelize);
 
 db.admins.hasMany(db.users, { as: 'users', onDelete: 'CASCADE' });
 db.users.belongsTo(db.admins, {
-  foreignKey: 'adminId',
+  foreignKey: 'admin_Id',
   as: 'admin',
 });
 
