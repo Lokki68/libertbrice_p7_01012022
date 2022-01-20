@@ -5,6 +5,7 @@ const Post = db.posts;
 const Comment = db.comments;
 const Like = db.likes;
 
+// Find All User
 exports.getAllUser = (req, res, next) => {
   User.findAll({
     attributes: { exclude: ['password'] },
@@ -17,6 +18,7 @@ exports.getAllUser = (req, res, next) => {
     .catch((err) => res.status(400).json({ err: err.message }));
 };
 
+// Find One User
 exports.getById = (req, res, next) => {
   const id = req.params.id;
 
@@ -43,6 +45,7 @@ exports.getById = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
+// Update User
 exports.updateUser = (req, res, next) => {
   const { body } = req;
   const id = req.params.id;
@@ -64,6 +67,7 @@ exports.updateUser = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
+// Delete User
 exports.deleteUser = (req, res, next) => {
   const id = req.params.id;
 
