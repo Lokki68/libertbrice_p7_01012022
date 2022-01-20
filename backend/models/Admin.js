@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Admin = Sequelize.define(
+  const Admin = sequelize.define(
     'Admin',
     {
       username: {

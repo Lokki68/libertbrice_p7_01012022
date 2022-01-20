@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         unique: true,
       },
       password: {
-        type: Sequlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       image: {
@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: './uploads/profil/random_user.jpg',
       },
       email: {
-        type: Sequelize.SRING,
+        type: Sequelize.STRING,
         allowNull: true,
         unique: true,
       },

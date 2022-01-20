@@ -1,13 +1,8 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(
-  process.env.DB_BASE,
-  process.env.DB_USER,
-  process.env.DB_PASS,
-  {
-    dialect: 'mysql',
-    host: 'localhost',
-  },
-);
+const sequelize = new Sequelize('groupomania', 'root', 'LaithiBrice1903', {
+  dialect: 'mysql',
+  host: 'localhost',
+});
 
 sequelize
   .sync()
@@ -21,9 +16,9 @@ db.sequelize = sequelize;
 
 db.admins = require('./Admin')(sequelize, Sequelize);
 db.users = require('./User')(sequelize, Sequelize);
-db.posts = require('./Posts')(sequelize, Sequelize);
-db.comments = require('./Comments')(sequelize, Sequelize);
-db.likes = require('./Likes')(sequelize, Sequelize);
+db.posts = require('./Post')(sequelize, Sequelize);
+db.comments = require('./Comment')(sequelize, Sequelize);
+db.likes = require('./Like')(sequelize, Sequelize);
 
 // Users relations
 

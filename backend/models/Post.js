@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       date: {
         type: Sequelize.DATE,
-        defaultValue: Sequlize.NOW,
+        defaultValue: Sequelize.NOW,
       },
     },
     {
