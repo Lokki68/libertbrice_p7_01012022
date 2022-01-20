@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('groupomania', 'root', 'LaithiBrice1903', {
+const sequelize = new Sequelize('groupomania', 'lokki', 'Laithibrice1903', {
   dialect: 'mysql',
   host: 'localhost',
 });
@@ -17,33 +17,50 @@ db.sequelize = sequelize;
 db.admins = require('./Admin')(sequelize, Sequelize);
 db.users = require('./User')(sequelize, Sequelize);
 db.posts = require('./Post')(sequelize, Sequelize);
-db.comments = require('./Comment')(sequelize, Sequelize);
 db.likes = require('./Like')(sequelize, Sequelize);
+db.comments = require('./Comment')(sequelize, Sequelize);
 
-// Users relations
+// User
 
 db.admins.hasMany(db.users, { as: 'users', onDelete: 'CASCADE' });
-db.users.belongsTo(db.admins, { foreignKey: 'adminId', as: 'admin' });
+db.users.belongsTo(db.admins, {
+  foreignKey: 'adminId',
+  as: 'admin',
+});
 
-// Posts relations
+// Post
 
 db.users.hasMany(db.posts, { as: 'posts', onDelete: 'CASCADE' });
-db.posts.belongsTo(db.users, { foreignKey: 'userId', as: 'user' });
+db.posts.belongsTo(db.users, {
+  foreignKey: 'userId',
+  as: 'user',
+});
 
-// Comments relations
+// Comment
 
 db.users.hasMany(db.comments, { as: 'comments', onDelete: 'CASCADE' });
-db.comments.belongsTo(db.users, { foreignKey: 'userId', as: 'user' });
+db.comments.belongsTo(db.users, {
+  foreignKey: 'userId',
+  as: 'user',
+});
 
 db.posts.hasMany(db.comments, { as: 'comments', onDelete: 'CASCADE' });
-db.comments.belongsTo(db.posts, { foreignKey: 'postId', as: 'post' });
+db.comments.belongsTo(db.posts, {
+  foreignKey: 'postId',
+  as: 'post',
+});
 
-// Likes relations
-
+// Like
 db.users.hasMany(db.likes, { as: 'likes', onDelete: 'CASCADE' });
-db.likes.belongsTo(db.users, { foreignKey: 'userId', as: 'user' });
+db.likes.belongsTo(db.users, {
+  foreignKey: 'userId',
+  as: 'user',
+});
 
 db.posts.hasMany(db.likes, { as: 'likes', onDelete: 'CASCADE' });
-db.likes.belongsTo(db.posts, { foreignKey: 'postId', as: 'post' });
+db.likes.belongsTo(db.posts, {
+  foreignKey: 'postId',
+  as: 'post',
+});
 
 module.exports = db;
