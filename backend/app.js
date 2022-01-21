@@ -5,6 +5,7 @@ const cors = require('cors');
 // const -> Routes
 
 const userRoutes = require('./Routes/users.routes');
+const postRoutes = require('./Routes/posts.routes');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(express.json());
 // Routes
 
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
 // Exports -> app
 module.exports = app;
