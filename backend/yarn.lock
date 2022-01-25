@@ -491,14 +491,7 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-express.js@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/express.js/-/express.js-1.0.0.tgz#e35b9e5eb04d12c446a7efde09baa785c2952424"
-  integrity sha1-41ueXrBNEsRGp+/eCbqnhcKVJCQ=
-  dependencies:
-    express "^4.13.4"
-
-express@^4.13.4:
+express@^4.17.2:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.2.tgz#c18369f265297319beed4e5558753cc8c1364cb3"
   integrity sha512-oxlxJxcQlYwqPWKVJJtvQiwHgosH/LrLSPA+H4UxpyvSS6jC5aH+5MoHFM+KABgTOt0APue4w66Ha8jCUo9QGg==

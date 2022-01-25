@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       image: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.TEXT,
       },
       date: {
         type: Sequelize.DATE,

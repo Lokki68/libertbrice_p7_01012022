@@ -82,23 +82,21 @@ exports.getByUserId = (req, res, next) => {
 exports.createPost = (req, res, next) => {
   const { userId, message } = req.body;
 
-  console.log(req.file);
-
   const post = {
     userId: userId,
     message: message,
-    image: null,
+    image: '',
   };
 
-  // Ajout Image
   if (req.file) {
-    post.image = `${req.protocol}://${req.host}/images/${req.file.filename}`;
+    post.image = `../client/public/uploads/posts/${req.file.filename}`;
   }
 
-  // Create Post
+  // Create post
+
   Post.create(post)
     .then((data) => {
-      const msg = 'Post Created';
+      const msg = `Post Created`;
       res.status(200).json({ msg, data });
     })
     .catch((err) => res.status(500).json({ err: err.message }));
