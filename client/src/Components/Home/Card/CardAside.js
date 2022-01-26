@@ -10,6 +10,7 @@ export default function CardAside() {
       <CommandPost>
         <button className='material-icons '>favorite_border</button>
         <span>10</span>
+        <button className='material-icons'>comment</button>
       </CommandPost>
     </CardAsideContainer>
   );
@@ -42,7 +43,7 @@ const CommandPost = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 15px;
 
   button {
     border: 0;

@@ -13,6 +13,8 @@ export default function MainHome() {
       <PostForm />
       <ContainerHomeCard>
         <CardHome />
+        <CardHome />
+        
       </ContainerHomeCard>
     </Container>
   );
