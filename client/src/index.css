@@ -17,6 +17,7 @@ body,
 html {
   background: #e5e5e5;
   max-width: 1680px;
+  overflow-x: hidden;
 }
 
 a,

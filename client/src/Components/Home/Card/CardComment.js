@@ -26,6 +26,10 @@ const Container = styled.div`
   height: auto;
   padding: 15px;
   padding-bottom: 0;
+
+  &:last-child {
+    border-radius: 0 0 4px 4px;
+  }
 `;
 
 const Content = styled.div`

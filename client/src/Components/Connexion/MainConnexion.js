@@ -43,7 +43,6 @@ export default function MainConnexion() {
 
 // ----- Styled
 
-
 const MainContainer = styled.div`
   width: 100%;
   height: 85vh;
@@ -54,7 +53,6 @@ const Content = styled.div`
   position: relative;
   height: 100%;
   display: flex;
-  justify-content: center;
 `;
 
 const ConnexionBar = styled.div`
@@ -67,6 +65,13 @@ const ConnexionBar = styled.div`
   grid-auto-rows: auto;
   grid-template-areas: 'i c';
   text-align: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 'i' 'c';
+    bottom: 180px;
+  }
 
   button {
     font-family: Roboto, sans-serif;
@@ -94,5 +99,9 @@ const ConnexionBar = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width:768px) {
+      justify-content: flex-start;
+    }
   }
 `;

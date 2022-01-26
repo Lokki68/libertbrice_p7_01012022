@@ -26,6 +26,11 @@ const Container = styled.div`
   align-items: center;
   width: 950px;
   margin: 10px 0;
+
+  @media (max-width: 970px) {
+    width: 80%;
+    height: auto;
+  }
 `;
 
 const CardBox = styled.div`
@@ -39,4 +44,9 @@ const CardBox = styled.div`
   border-radius: 4px;
   box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.4);
   z-index: 10;
+
+  @media (max-width: 970px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;

@@ -65,8 +65,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   top: 2%;
-  left: 32.5%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 35%;
+  min-width: 350px;
   height: 75%;
   transition-duration: 0.5s;
   box-shadow: 3px 3px 1px rgba(51, 51, 51, 0.5);

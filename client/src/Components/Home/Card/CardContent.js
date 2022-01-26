@@ -10,6 +10,7 @@ export default function CardContent() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
           repellendus!
         </p>
+        <button className='material-icons'>edit</button>
       </Content>
     </Container>
   );
@@ -25,6 +26,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -35,5 +37,17 @@ const Content = styled.div`
   img {
     width: 50%;
     height: auto;
+  }
+
+  button {
+    position: absolute;
+    font-size: 18px;
+    right: 5px;
+    border: 0;
+    color: grey;
+
+    &:hover {
+      color: black;
+    }
   }
 `;

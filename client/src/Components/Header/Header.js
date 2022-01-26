@@ -39,7 +39,7 @@ const Container = styled.header`
     'L  D'
     'N  N';
 
-  @media (min-width: 768px) {
+  @media (min-width: 815px) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 90px;
     grid-template-areas: 'L N D';
@@ -94,7 +94,11 @@ const LogoutContainer = styled.div`
   button {
     background-color: #fc2f08;
     color: #f1f1f1;
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
+
+    &:hover {
+      background-color: #fc947c;
+    }
   }
 `;
