@@ -7,6 +7,7 @@ const cors = require('cors');
 const userRoutes = require('./Routes/users.routes');
 const postRoutes = require('./Routes/posts.routes');
 const commentRoutes = require('./Routes/comment.routes');
+const adminRoutes = require('./Routes/admin.routes');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/post/comment', commentRoutes);
+app.use('/api/user/admin', adminRoutes);
 
 // Exports -> app
 module.exports = app;

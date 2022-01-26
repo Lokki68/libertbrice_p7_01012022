@@ -1,6 +1,7 @@
 const db = require('../models');
 
 const User = db.users;
+const Admin = db.admins;
 const Post = db.posts;
 const Comment = db.comments;
 const Like = db.likes;
@@ -8,6 +9,12 @@ const Like = db.likes;
 // Find All User
 exports.getAllUser = (req, res, next) => {
   User.findAll({
+    include: [
+      {
+        model: Admin,
+        as: 'admin',
+      },
+    ],
     attributes: { exclude: ['password'] },
     order: ['username'],
   })

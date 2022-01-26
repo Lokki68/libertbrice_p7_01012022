@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500&family=Roboto:wght@400;500&display=swap');
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::selection {
+  background: #fcd4d3;
+}
+
+:root,
+body,
+html {
+  background: #e5e5e5;
+  max-width: 1680px;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+input,
+select,
+textarea {
+  resize: none;
+  border-radius: 20px;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  padding: 10px;
+}
+
+input[type='radio'] {
+  margin: 0 15px;
+}
+
+button,
+input[type='submit'] {
+  cursor: pointer;
+  padding: 10px 20px;
+}
