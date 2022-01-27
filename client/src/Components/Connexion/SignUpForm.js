@@ -1,48 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+import LoginForm from './LoginForm';
 
 export default function SignUpForm() {
+  const [formSubmit, setFormSubmit] = useState(false);
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [controlPassword, setControlPassword] = useState('');
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    const usernameError = document.querySelector('.username-error');
+
+    const confirmError = document.querySelector('.confirm-error');
+    const validationError = document.querySelector('.validation-error');
+
+    usernameError.innerHTML = '';
+    confirmError.innerHTML = '';
+    validationError.innerHTML = '';
+
+    if (!username) {
+      usernameError.innerHTML = '<p>Veuillez saisir votre Username</p>';
+    } else if (username.length < 3) {
+      usernameError.innerHTML = '<p>Un minimum de 3 caractères est requis</p>';
+    } else if (password !== controlPassword) {
+      confirmError.innerHTML = '<p>Les mots de passe ne correspondent pas</p>';
+    } else {
+      await axios({
+        method: 'post',
+        url: 'http://localhost:8080/api/user/signup',
+        data: {
+          username,
+          password,
+        },
+      })
+        .then((res) => {
+          if (res.data.err) {
+            console.log(res);
+
+            validationError.innerHTML = `<p>${res.data.err}</p>`;
+          } else {
+            setFormSubmit(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
-    <OverlayContainer>
-      <Container>
-        <h1>Inscription</h1>
-        <FormWrapper>
-          <UsernameForm>
-            <input
-              type='text'
-              name='username'
-              id='username'
-              placeholder='Username ...'
-            />
-          </UsernameForm>
-          <UsernameError className='username-error'></UsernameError>
-          <br />
-          <PasswordForm>
-            <input
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Password ...'
-            />
-          </PasswordForm>
-          <PasswordError className='password-error'></PasswordError>
-          <br />
-          <PasswordConfirmForm>
-            <input
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Confirm Password ...'
-            />
-          </PasswordConfirmForm>
-          <PasswordConfirmError className='confirm-error'></PasswordConfirmError>
-          <br />
-          <input type='submit' value='Valider Inscription' />
-          <br />
-          <ValidationError className='validation-error'></ValidationError>
-        </FormWrapper>
-      </Container>
-    </OverlayContainer>
+    <div>
+      {formSubmit ? (
+        <LoginForm success='true' />
+      ) : (
+        <OverlayContainer>
+          <Container>
+            <h1>Inscription</h1>
+            <FormWrapper onSubmit={handleRegister}>
+              <UsernameForm>
+                <input
+                  type='text'
+                  name='username'
+                  id='username'
+                  placeholder='Username ...'
+                  onInput={(e) => setUsername(e.target.value)}
+                />
+              </UsernameForm>
+              <UsernameError className='username-error'></UsernameError>
+              <br />
+              <PasswordForm>
+                <input
+                  type='password'
+                  name='password'
+                  id='password'
+                  placeholder='Password ...'
+                  onInput={(e) => setPassword(e.target.value)}
+                />
+              </PasswordForm>
+              <PasswordError className='password-error'></PasswordError>
+              <br />
+              <PasswordConfirmForm>
+                <input
+                  type='password'
+                  name='confirmPassword'
+                  id='confirmPassword'
+                  placeholder='Confirm Password ...'
+                  onInput={(e) => setControlPassword(e.target.value)}
+                />
+              </PasswordConfirmForm>
+              <PasswordConfirmError className='confirm-error'></PasswordConfirmError>
+              <br />
+              <input type='submit' value='Valider Inscription' />
+              <br />
+              <ValidationError className='validation-error'></ValidationError>
+            </FormWrapper>
+          </Container>
+        </OverlayContainer>
+      )}
+    </div>
   );
 }
 

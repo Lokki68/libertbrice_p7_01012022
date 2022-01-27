@@ -18,7 +18,7 @@ export default function MainConnexion() {
   return (
     <MainContainer>
       <Content>
-        {signUpModal && <SignUpForm />}
+        {signUpModal && <SignUpForm props={inscriptModal} />}
         {loginModal && <LoginForm />}
         <ConnexionBar>
           <span className='inscription'>
@@ -100,7 +100,7 @@ const ConnexionBar = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       justify-content: flex-start;
     }
   }
