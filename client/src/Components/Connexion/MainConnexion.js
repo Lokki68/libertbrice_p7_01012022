@@ -45,7 +45,7 @@ export default function MainConnexion() {
 
 const MainContainer = styled.div`
   width: 100%;
-  height: 85vh;
+  height: calc(100vh - 110px);
   background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
 `;
 

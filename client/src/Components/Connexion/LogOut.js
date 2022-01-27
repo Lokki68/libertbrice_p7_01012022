@@ -1,7 +1,17 @@
 import React from 'react';
 
 export default function LogOut() {
-  return <button>Se deconnecter</button>;
+  const removeLocalStorage = (key) => {
+    localStorage.removeItem(key);
+  };
+
+  const logOut = () => {
+    removeLocalStorage('UserId');
+
+    window.location = '/';
+  };
+
+  return <button onClick={logOut}>Se deconnecter</button>;
 }
 
 // ----- Styled

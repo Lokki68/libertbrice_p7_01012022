@@ -12,11 +12,11 @@ export default function Header() {
         </NavLink>
       </LogoContainer>
       <NavContainer>
-        <NavLink to='/' className='btn'>
+        <NavLink to='/profil' className='btn'>
           <img src='./img/logo_planete.svg' alt='Profil' />
           Profil
         </NavLink>
-        <NavLink to='/' className='btn'>
+        <NavLink to='/annuaire' className='btn'>
           Annuaire
         </NavLink>
       </NavContainer>
@@ -32,6 +32,8 @@ const Container = styled.header`
   height: 90px;
   width: 100%;
   background-color: #fc2f08;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 45px);

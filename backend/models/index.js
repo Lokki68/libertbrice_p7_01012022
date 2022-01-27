@@ -20,13 +20,6 @@ db.posts = require('./Post')(sequelize, Sequelize);
 db.likes = require('./Like')(sequelize, Sequelize);
 db.comments = require('./Comment')(sequelize, Sequelize);
 
-// User
-
-db.admins.hasMany(db.users, { as: 'users', onDelete: 'CASCADE' });
-db.users.belongsTo(db.admins, {
-  foreignKey: 'adminId',
-  as: 'admin',
-});
 
 // Post
 
