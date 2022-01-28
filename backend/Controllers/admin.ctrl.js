@@ -26,20 +26,18 @@ exports.passAdmin = (req, res) => {
           userId,
         };
 
-        const userAdmin = {
-          admin: true,
-        };
-
-        User.update(userAdmin, {
-          where: { id: userId },
-        })
-          .then((user) => {
-            res.status(200).send('Success');
-          })
-          .catch((err) => res.status(403).json({ err: err.message }));
-
         Admin.create(newAdmin)
           .then((data) => {
+            const userAdmin = {
+              admin: data.id,
+            };
+            User.update(userAdmin, {
+              where: { id: userId },
+            })
+              .then(() => {
+                console.log('Success');
+              })
+              .catch((err) => res.status(403).json({ err: err.message }));
             const msg = 'New Admin was created successfully';
             res.status(200).json({ msg, data });
           })
@@ -52,4 +50,25 @@ exports.passAdmin = (req, res) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-exports.deleteAdmin = (req, res) => {};
+exports.deleteAdmin = (req, res) => {
+  const id = req.params.id;
+
+  Admin.findByPk(id).then((data) => {
+    if (!data) return res.status(404).json({ msg: 'Admin not found' });
+
+    const updateAdmin = {
+      admin: 0,
+    };
+
+    User.update(updateAdmin, {
+      where: { username: data.username },
+    });
+    return Admin.destroy({
+      where: { id: data.id },
+    })
+      .then((data) => {
+        res.status(200).json({ msg: 'Admin deleted', data });
+      })
+      .catch((err) => res.status(500).json({ err: err.message }));
+  });
+};

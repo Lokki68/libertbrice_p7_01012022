@@ -6,6 +6,6 @@ router.get('/', adminCtrl.getAll);
 
 router.post('/:id', adminCtrl.passAdmin);
 
-router.delete('/:userId', adminCtrl.deleteAdmin);
+router.delete('/:id', adminCtrl.deleteAdmin);
 
 module.exports = router;

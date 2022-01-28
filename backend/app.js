@@ -33,8 +33,8 @@ app.use(express.json());
 
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
-app.use('/api/post/comment', commentRoutes);
-app.use('/api/user/admin', adminRoutes);
+app.use('/api/comment', commentRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Exports -> app
 module.exports = app;
