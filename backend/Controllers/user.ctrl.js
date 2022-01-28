@@ -9,12 +9,6 @@ const Like = db.likes;
 // Find All User
 exports.getAllUser = (req, res, next) => {
   User.findAll({
-    include: [
-      {
-        model: Admin,
-        as: 'admin',
-      },
-    ],
     attributes: { exclude: ['password'] },
     order: ['username'],
   })

@@ -26,6 +26,18 @@ exports.passAdmin = (req, res) => {
           userId,
         };
 
+        const userAdmin = {
+          admin: true,
+        };
+
+        User.update(userAdmin, {
+          where: { id: userId },
+        })
+          .then((user) => {
+            res.status(200).send('Success');
+          })
+          .catch((err) => res.status(403).json({ err: err.message }));
+
         Admin.create(newAdmin)
           .then((data) => {
             const msg = 'New Admin was created successfully';

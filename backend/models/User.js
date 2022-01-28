@@ -29,6 +29,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
+      admin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
+      },
       date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
