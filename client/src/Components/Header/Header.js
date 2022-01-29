@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 import LogOut from '../Connexion/LogOut';
 
 export default function Header() {
@@ -31,7 +32,7 @@ export default function Header() {
 const Container = styled.header`
   height: 90px;
   width: 100%;
-  background-color: #fc2f08;
+  background-color: ${colors.tertiary};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 
   display: grid;
@@ -67,10 +68,10 @@ const NavContainer = styled.div`
     align-items: center;
     width: 190px;
     height: 35px;
-    color: #f1f1f1;
+    color: ${colors.white};
     text-decoration: none;
-    background-color: #fc2f08;
-    box-shadow: 2px 2px 2px rgb(40, 40, 40), inset 2px 2px 2px #f1f1f1;
+    background-color: ${colors.tertiary};
+    box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.white};
     font-size: 16px;
     font-family: Roboto, sans-serif;
     margin: 0 15px;
@@ -82,7 +83,7 @@ const NavContainer = styled.div`
 
     &.active,
     &:hover {
-      box-shadow: inset 2px 2px 2px rgb(40, 40, 40), 2px 2px 2px #f1f1f1;
+      box-shadow: 2px 2px 2px ${colors.white}, inset 2px 2px 2px ${colors.black};
     }
   }
 `;
@@ -94,13 +95,13 @@ const LogoutContainer = styled.div`
   align-items: center;
 
   button {
-    background-color: #fc2f08;
-    color: #f1f1f1;
+    background-color: ${colors.tertiary};
+    color: ${colors.white};
     font-size: 12px;
     text-transform: uppercase;
 
     &:hover {
-      background-color: #fc947c;
+      background-color: ${colors.secondary};
     }
   }
 `;

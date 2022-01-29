@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 import UpdateInfo from './UpdateInfo';
 import UploadPicture from './UploadPicture';
 
@@ -18,7 +19,7 @@ const Container = styled.div`
   height: 85%;
   width: 70%;
   border-radius: 4px;
-  box-shadow: 5px 5px 12px #fcd4d3;
+  box-shadow: 5px 5px 12px ${colors.primary};
   background-color: rgba(128, 128, 128, 0.323);
 `;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 
 export default function PostForm() {
   return (
@@ -31,7 +32,7 @@ const Container = styled.div`
   width: 500px;
   height: 300px;
   margin-top: 10px;
-  background-color: #fcd4d3;
+  background-color: ${colors.primary};
   border-radius: 4px;
   box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2);
 `;
@@ -56,12 +57,12 @@ const FormWrapper = styled.div`
   }
 
   input[type='file'] {
-    width: 150px;
+    display: none;
   }
 
   button {
-    border-radius: 20px;
-    background-color: #fc2f08;
+    border-radius: 4px;
+    background-color: ${colors.tertiary};
     margin: 0 15px;
   }
 `;

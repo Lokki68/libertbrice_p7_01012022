@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../../utils/styles/colors';
+import randomUser from '../../../img/random_user.jpg';
 
 export default function CardAside() {
   return (
     <CardAsideContainer>
       <InfoPost>
-        <img src='./uploads/profils/random_user.jpg' alt='profil' />
+        <img src={randomUser} alt='profil' />
         <span>
           <h2>Username</h2>
           <p>Time information</p>
@@ -88,7 +90,7 @@ const CommandPost = styled.div`
     }
 
     &.likeOn {
-      color: #35591a;
+      color: ${colors.success};
     }
   }
 `;

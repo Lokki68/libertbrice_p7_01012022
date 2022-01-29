@@ -48,10 +48,21 @@ exports.getById = (req, res, next) => {
 
 // Update User
 exports.updateUser = (req, res, next) => {
-  const { body } = req;
+  const { email, description, phoneNumber } = req.body;
   const id = req.params.id;
 
-  User.update(body, {
+  const userInfo = {
+    email,
+    description,
+    phoneNumber,
+    image: '',
+  };
+
+  if (req.file) {
+    userInfo.image = `../client/public/uploads/profils/${req.file.filename}`;
+  }
+
+  User.update(userInfo, {
     where: { id },
   })
     .then((_) => {

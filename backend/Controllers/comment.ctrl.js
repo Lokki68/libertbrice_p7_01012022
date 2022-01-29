@@ -7,9 +7,7 @@ const Comment = db.comments;
 exports.getById = (req, res) => {
   const id = req.params.id;
 
-  Comment.findByPk(id, {
-    include: ['user'],
-  })
+  Comment.findByPk(id, {})
     .then((comment) => {
       const msg = `Comment Found`;
       res.status(200).json({ msg, data: comment });
@@ -36,13 +34,12 @@ exports.createComment = (req, res) => {
 };
 
 exports.updateComment = (req, res) => {
-  /* const token = req.header.authorization.split(' ')[1];
+  const token = req.header.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
-  const userId = decodedToken.userId */
+  const userId = decodedToken.userId
 
   const id = req.params.id;
   const { body } = req;
-  const userId = req.body.userId; //TODO: a retirer apres
 
   Comment.findByPk(id)
     .then((comment) => {
@@ -64,12 +61,11 @@ exports.updateComment = (req, res) => {
 };
 
 exports.deleteComment = (req, res) => {
-  /* const token = req.header.authorization.split(' ')[1];
+  const token = req.header.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
-  const userId = decodedToken.userId */
+  const userId = decodedToken.userId
 
   const id = req.params.id;
-  const userId = req.body.userId; //TODO: a retirer apres
 
   Comment.findByPk(id)
     .then((comment) => {

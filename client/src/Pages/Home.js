@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { colors } from '../utils/styles/colors';
 import Header from '../Components/Header/Header';
 import MainHome from '../Components/Home/MainHome';
 
@@ -20,5 +20,5 @@ const HomePage = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #e5e5e5;
+  background-color: ${colors.fond};
 `;

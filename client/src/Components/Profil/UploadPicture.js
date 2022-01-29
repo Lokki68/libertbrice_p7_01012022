@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 
 export default function UploadPicture() {
   return (
@@ -36,7 +37,7 @@ const Container = styled.div`
 `;
 
 const Admin = styled.div`
-  background: #fc2f08;
+  background: ${colors.tertiary};
   padding: 10px;
   margin: 15px;
   border-radius: 5px;
@@ -57,7 +58,7 @@ const FormContainer = styled.form`
   label {
     margin: 15px;
     padding: 8px;
-    background: #fcd4d3;
+    background: ${colors.primary};
     border-radius: 999px;
     cursor: pointer;
   }

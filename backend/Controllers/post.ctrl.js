@@ -89,7 +89,7 @@ exports.createPost = (req, res, next) => {
   };
 
   if (req.file) {
-    post.image = `../client/public/uploads/posts/${req.file.filename}`;
+    post.image = `./uploads/posts/${req.file.filename}`;
   }
 
   // Create post

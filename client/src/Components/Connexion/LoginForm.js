@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 
 export default function LoginForm({ success }) {
   const [username, setUsername] = useState('');
@@ -109,7 +110,7 @@ const Container = styled.div`
 
   p {
     margin-bottom: 10px;
-    color: #fff;
+    color: ${colors.white};
   }
 `;
 

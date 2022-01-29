@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 
 export default function Footer() {
   return (
@@ -16,13 +17,12 @@ export default function Footer() {
 
 // ----- Styled
 
-
 const FooterContainer = styled.footer`
   width: 100%;
   height: 110px;
   position: absolute;
   bottom: 0;
-  background-color: #040404;
+  background-color: ${colors.quatriary};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,7 @@ const FooterContainer = styled.footer`
     line-height: 1.8;
     display: flex;
     flex-direction: column;
-    color: #fcd4d3;
+    color: ${colors.primary};
     margin-right: 80px;
   }
 `;

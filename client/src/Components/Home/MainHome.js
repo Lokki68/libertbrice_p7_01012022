@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 import Loader from '../Loader/Loader';
 import CardHome from './CardHome';
 import PostForm from './PostForm';
@@ -39,6 +40,6 @@ const ContainerHomeCard = styled.div`
   button {
     margin: 10px;
     border-radius: 20px;
-    background-color: #fcd4d3;
+    background-color: ${colors.primary};
   }
 `;

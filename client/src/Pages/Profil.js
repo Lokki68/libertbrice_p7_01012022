@@ -21,5 +21,6 @@ const ProfilPage = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
   background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
 `;

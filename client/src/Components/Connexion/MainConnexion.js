@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
@@ -79,19 +80,20 @@ const ConnexionBar = styled.div`
     border-radius: 4px;
     width: 223px;
     height: 60px;
-    box-shadow: 5px 5px 15px 2px #040404, inset 3px 3px 20px 1px #040404;
+    box-shadow: 5px 5px 15px 2px ${colors.quatriary},
+      inset 3px 3px 20px 1px ${colors.quatriary};
 
     &:hover,
     &:active {
-      box-shadow: inset 3px 3px 20px 1px #fcd4d3;
-      background-color: #040404;
-      color: #fff;
+      box-shadow: inset 3px 3px 20px 1px ${colors.primary};
+      background-color: ${colors.quatriary};
+      color: ${colors.white};
     }
 
     &.is-active {
-      box-shadow: inset 3px 3px 20px 1px #fcd4d3;
-      background-color: #040404;
-      color: #fff;
+      box-shadow: inset 3px 3px 20px 1px ${colors.primary};
+      background-color: ${colors.quatriary};
+      color: ${colors.white};
     }
   }
 

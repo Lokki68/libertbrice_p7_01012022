@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 
 import CardAside from './Card/CardAside';
 import CardComment from './Card/CardComment';
@@ -40,7 +41,7 @@ const CardBox = styled.div`
   margin-bottom: 0;
   width: 100%;
   height: 300px;
-  background-color: #fcd4d3;
+  background-color: ${colors.primary};
   border-radius: 4px;
   box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.4);
   z-index: 10;

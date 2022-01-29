@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { colors } from '../../utils/styles/colors';
 
 export default function Loader() {
   return (
@@ -30,7 +31,7 @@ const LoaderSquare = styled.div`
   width: 10px;
   padding: 20px;
   height: 10px;
-  border: 2px solid #fc2f08;
+  border: 2px solid ${colors.tertiary};
   border-bottom: transparent;
   border-radius: 50%;
   animation: ${rotate} 1s infinite linear;
