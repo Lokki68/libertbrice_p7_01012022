@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function CardComment() {
+export default function CardComment({ comments }) {
   return (
     <Container>
-      <Content>
-        <img src='./uploads/profils/random_user.jpg' alt='profile' />
-        <Comment>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio
-            tenetur in ipsum ipsam excepturi blanditiis. Nesciunt dolorem
-            explicabo nemo commodi.
-          </p>
-        </Comment>
-      </Content>
+      {comments.map((comment) => {
+        return (
+          <Content key={comment.id}>
+            <img src='./uploads/profil/random_user.jpg' alt='profil' />
+            <Comment>
+              <p>{comment.content}</p>
+            </Comment>
+          </Content>
+        );
+      })}
     </Container>
   );
 }
@@ -49,6 +49,10 @@ const Content = styled.div`
 `;
 
 const Comment = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   padding: 10px;
   background-color: rgba(252, 47, 8, 0.1);
   border-radius: 999px;

@@ -7,6 +7,7 @@ import rootReducer from './redux/reducers';
 import App from './App';
 
 import { getUsers } from './redux/actions/users.actions';
+import { getPosts } from './redux/actions/post.actions';
 
 // Devtools
 
@@ -20,6 +21,7 @@ const store = createStore(
 );
 
 store.dispatch(getUsers());
+store.dispatch(getPosts());
 
 ReactDOM.render(
   <Provider store={store}>

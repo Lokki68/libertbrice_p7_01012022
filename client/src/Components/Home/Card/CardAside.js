@@ -2,20 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../utils/styles/colors';
 import randomUser from '../../../img/random_user.jpg';
+import { dateParser } from '../../../utils/utils';
 
-export default function CardAside() {
+export default function CardAside({ likes, date }) {
+  const newDate = dateParser(date);
+
+  console.log(newDate);
   return (
     <CardAsideContainer>
       <InfoPost>
         <img src={randomUser} alt='profil' />
         <span>
           <h2>Username</h2>
-          <p>Time information</p>
+          <p>{newDate}</p>
         </span>
       </InfoPost>
       <CommandPost>
         <button className='material-icons '>favorite_border</button>
-        <span>10</span>
+        <span>{likes.length}</span>
         <button className='material-icons'>comment</button>
       </CommandPost>
     </CardAsideContainer>

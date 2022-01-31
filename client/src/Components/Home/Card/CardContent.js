@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { isEmpty } from '../../../utils/utils';
 
-export default function CardContent() {
+export default function CardContent({ post }) {
   return (
     <Container>
       <Content>
-        <img src='./uploads/posts/blog-kyoto.png' alt='kyoto' />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
-          repellendus!
-        </p>
+        {!isEmpty(post.image) ? (
+          <img src={post.image} alt='' />
+        ) : (
+          ''
+        )}
+        <p>{post.message}</p>
         <button className='material-icons'>edit</button>
       </Content>
     </Container>

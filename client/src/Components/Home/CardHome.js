@@ -6,14 +6,17 @@ import CardAside from './Card/CardAside';
 import CardComment from './Card/CardComment';
 import CardContent from './Card/CardContent';
 
-export default function CardHome() {
+export default function CardHome({ post }) {
+  const comments = post.comments;
+  const likes = post.likes;
+
   return (
     <Container>
       <CardBox>
-        <CardAside />
-        <CardContent />
+        <CardAside likes={likes} date={post.date}  />
+        <CardContent post={post} />
       </CardBox>
-      <CardComment />
+      {comments.length > 0 ? <CardComment comments={comments} /> : ''}
     </Container>
   );
 }
