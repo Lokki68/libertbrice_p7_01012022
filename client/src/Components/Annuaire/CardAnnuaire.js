@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import randomUser from '../../img/random_user.jpg';
 import { colors } from '../../utils/styles/colors';
 
-export default function CardAnnuaire() {
+export default function CardAnnuaire({ user }) {
+  const isAdmin = user.admin;
+
   const [toggle, setToggle] = useState(false);
+  const [modify, setModify] = useState(false);
 
   const toggleModal = () => {
     setToggle(!toggle);
+  };
+
+  const toggleModify = () => {
+    setModify(!modify);
   };
   return (
     <Container>
@@ -15,24 +21,48 @@ export default function CardAnnuaire() {
         <OverlayModal>
           <CardModal>
             <PictureModal>
-              <img src={randomUser} alt='profil' />
+              <img src={user.image} alt='profil' />
             </PictureModal>
             <InfoModal>
               <div className='username'>
-                <h2>Username</h2>
+                <h2>{user.username}</h2>
               </div>
               <div className='contact'>
-                <p>
-                  Email : <strong>email@gmail.com</strong>
-                </p>
-                <p>
-                  Numéro de poste : <strong>4321</strong>{' '}
-                </p>
+                {!modify ? (
+                  <div>
+                    <p>
+                      Email : <strong>{user.email}</strong>
+                    </p>
+                    <p>
+                      Numéro de poste : <strong>{user.phoneNumber}</strong>
+                    </p>
+                  </div>
+                ) : (
+                  <form className='formContact'>
+                    <input type='email' id='email' placeholder='Email ...' />
+                    <input
+                      type='number'
+                      id='phoneNumber'
+                      placeholder='Phone Number ...'
+                    />
+
+                    <button type='submit'>Enregistrer modifications</button>
+                  </form>
+                )}
               </div>
               <p>
                 Un peu d'info : <strong>Descritpion</strong>
               </p>
             </InfoModal>
+            {isAdmin && (
+              <AdminModalCommand>
+                <h3>Admin</h3>
+                <button className='btn btn-modify' onClick={toggleModify}>
+                  Modifier
+                </button>
+                <button className='btn btn-delete'>Supprimer</button>
+              </AdminModalCommand>
+            )}
             <button className='material-icons btn-close' onClick={toggleModal}>
               close
             </button>
@@ -44,13 +74,17 @@ export default function CardAnnuaire() {
           info
         </span>
         <Picture>
-          <img src={randomUser} alt='profil' />
-          <span className='material-icons'>star</span>
+          <img src={user.image} alt='profil' />
+          {user.admin !== null ? (
+            <span className='material-icons'>star</span>
+          ) : (
+            ''
+          )}
         </Picture>
         <InfoCard>
-          <h3>Username</h3>
-          <p>Email</p>
-          <p>PhoneNumber</p>
+          <h3>{user.username}</h3>
+          <p>{user.email}</p>
+          <p>{user.phoneNumber}</p>
         </InfoCard>
       </Card>
     </Container>
@@ -174,4 +208,21 @@ const InfoModal = styled.div`
   flex-direction: column;
   width: 75%;
   height: inherit;
+
+  .formContact {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      border-radius: 4px;
+      background-color: ${colors.secondary};
+    }
+  }
 `;
+
+const AdminModalCommand = styled.div``;
