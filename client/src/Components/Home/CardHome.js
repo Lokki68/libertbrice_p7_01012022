@@ -9,11 +9,13 @@ import CardContent from './Card/CardContent';
 export default function CardHome({ post }) {
   const comments = post.comments;
   const likes = post.likes;
+  const user = post.userId;
+
 
   return (
     <Container>
       <CardBox>
-        <CardAside likes={likes} date={post.date}  />
+        <CardAside likes={likes} date={post.date} userId={user} />
         <CardContent post={post} />
       </CardBox>
       {comments.length > 0 ? <CardComment comments={comments} /> : ''}

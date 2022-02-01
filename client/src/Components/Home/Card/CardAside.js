@@ -1,19 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../../utils/styles/colors';
-import randomUser from '../../../img/random_user.jpg';
 import { dateParser } from '../../../utils/utils';
 
-export default function CardAside({ likes, date }) {
+export default function CardAside({ likes, date, userId }) {
+  const { data } = useSelector((state) => state.usersReducer);
   const newDate = dateParser(date);
 
-  console.log(newDate);
+  const user = data.filter((el) => el.id === userId);
+
+  console.log(user);
+
   return (
     <CardAsideContainer>
       <InfoPost>
-        <img src={randomUser} alt='profil' />
+        <img src={user[0].image} alt='profil' />
         <span>
-          <h2>Username</h2>
+          <h2>{user[0].username}</h2>
           <p>{newDate}</p>
         </span>
       </InfoPost>
