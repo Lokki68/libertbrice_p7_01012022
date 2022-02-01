@@ -24,3 +24,7 @@ export const dateParser = (value) => {
 
   return date.toString();
 };
+
+export const refresPage = () => {
+  window.location.reload();
+};

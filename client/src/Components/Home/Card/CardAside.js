@@ -10,8 +10,6 @@ export default function CardAside({ likes, date, userId }) {
 
   const user = data.filter((el) => el.id === userId);
 
-  console.log(user);
-
   return (
     <CardAsideContainer>
       <InfoPost>

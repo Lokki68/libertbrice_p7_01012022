@@ -1,22 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../utils/styles/colors';
+import { refreshPage } from '../../utils/utils';
+import { createPost } from '../../redux/actions/post.actions';
 
-export default function PostForm() {
+export default function PostForm({ user }) {
+  const dispatch = useDispatch();
+
+  const [message, setMessage] = useState('');
+  const [image, setImage] = useState('');
+  const { id } = user;
+
+  console.log(user);
+
+  const clearAll = () => {
+    setMessage('');
+    setImage('');
+  };
+
+  const addPost = (e) => {
+    e.preventDefault();
+
+    const newPost = {
+      userId: id,
+      message: message,
+      image: image,
+    };
+
+    console.log('envoyée !!!');
+
+    dispatch(createPost(newPost));
+  };
+
   return (
     <Container>
-      <FormWrapper>
+      <FormWrapper onSubmit={addPost}>
         <h2>Votre nouveau post :</h2>
         <MessageInput>
-          <textarea placeholder='Votre message ...'></textarea>
+          <textarea
+            placeholder='Votre message ...'
+            onChange={(e) => setMessage(e.target.value)}
+          ></textarea>
         </MessageInput>
-        <h3>Inserer une image :</h3>
+
         <ImageInput>
-          <input type='file' name='image' id='image' />
+          <label htmlFor='image'>Choisir une image</label>
+          <input
+            type='file'
+            name='image'
+            id='image'
+            accept='.jpg, .jpeg, .png'
+            onChange={(e) => setImage(e.target.files[0])}
+          />
         </ImageInput>
         <ButtonWrapper>
-          <button>Cancel</button>
-          <button>Envoyer</button>
+          <button onClick={() => clearAll()}>Cancel</button>
+          <button onClick={addPost}>Envoyer</button>
         </ButtonWrapper>
       </FormWrapper>
     </Container>

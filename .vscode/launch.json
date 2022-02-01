@@ -8,8 +8,10 @@
       "type": "pwa-node",
       "request": "launch",
       "name": "Launch Program",
-      "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/backend/server.js"
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${file}"
     }
   ]
 }

@@ -9,22 +9,21 @@ import PostForm from './PostForm';
 
 export default function MainHome() {
   const postsData = useSelector((state) => state.postsReducer);
+  const { data } = useSelector((state) => state.userReducer);
+
+  console.log(postsData);
 
   return (
     <Container>
-      <PostForm />
+      {!isEmpty(data) && <PostForm user={data} />}
       {isEmpty(postsData) && <Loader />}
-      {
-        !isEmpty(postsData) && (
-
-      <ContainerHomeCard>
-        { 
-          postsData.map((post) =>{
-            return <CardHome key={post.id} post={post} />
-          })
-        }
-      </ContainerHomeCard>
-        )}
+      {!isEmpty(postsData) && (
+        <ContainerHomeCard>
+          {postsData.map((post) => {
+            return <CardHome key={post.id} post={post} />;
+          })}
+        </ContainerHomeCard>
+      )}
     </Container>
   );
 }
