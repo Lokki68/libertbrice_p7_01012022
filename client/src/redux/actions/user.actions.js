@@ -1,3 +1,4 @@
+import { config } from '../../utils/config';
 import axios from 'axios';
 
 export const GET_USER = 'GET_USER';
@@ -7,7 +8,7 @@ export const DELETE_ONE = 'DELETE_ONE';
 export const getUser = (uid) => {
   return (dispatch) => {
     return axios
-      .get(`http://localhost:8080/api/user/${uid}`)
+      .get(`${config.API_REACT}/user/${uid}`)
       .then((res) => {
         dispatch({ type: GET_USER, payload: res.data });
       })
@@ -18,10 +19,10 @@ export const getUser = (uid) => {
 export const updateOne = (data, id) => {
   return (dispatch) => {
     return axios
-      .put(`http://localhost:8080/api/user/${id}`, data)
+      .put(`${config.API_REACT}/user/${id}`, data)
       .then((res) => {
         console.log(res);
-        return axios.get(`http://localhost:8080/api/user/${id}`).then((res) => {
+        return axios.get(`${config.API_REACT}/user/${id}`).then((res) => {
           dispatch({ type: UPDATE_ONE, payload: res });
         });
       })
@@ -32,7 +33,7 @@ export const updateOne = (data, id) => {
 export const deleteOne = (id) => {
   return (dispatch) => {
     return axios
-      .delete(`http://localhost:8080/api/user/${id}`)
+      .delete(`${config.API_REACT}/user/${id}`)
       .then((res) => {
         dispatch({ type: DELETE_ONE, payload: res });
       })
