@@ -1,21 +1,35 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../utils/styles/colors';
 import { isEmpty } from '../../utils/utils';
+import { getPosts } from '../../redux/actions/post.actions';
 import Loader from '../Loader/Loader';
 import CardHome from './CardHome';
 import PostForm from './PostForm';
 
 export default function MainHome() {
+  const dispatch = useDispatch();
   const postsData = useSelector((state) => state.postsReducer);
   const { data } = useSelector((state) => state.userReducer);
 
-  console.log(postsData);
+  const [formToggle, setFormToggle] = useState(false);
+
+  const handleForm = () => {
+    setFormToggle(!formToggle);
+  };
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [postsData]);
 
   return (
     <Container>
-      {!isEmpty(data) && <PostForm user={data} />}
+      {formToggle ? (
+        !isEmpty(data) && <PostForm user={data} toggleFunc={handleForm} />
+      ) : (
+        <button onClick={handleForm}>Formulaire Post</button>
+      )}
       {isEmpty(postsData) && <Loader />}
       {!isEmpty(postsData) && (
         <ContainerHomeCard>
@@ -35,6 +49,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  button {
+    margin: 50px;
+    border-radius: 4px;
+    background-color: ${colors.tertiary};
+
+    &:hover {
+      background-color: ${colors.secondary};
+    }
+  }
 `;
 
 const ContainerHomeCard = styled.div`

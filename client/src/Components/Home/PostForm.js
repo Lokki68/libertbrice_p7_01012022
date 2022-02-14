@@ -2,22 +2,16 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../utils/styles/colors';
-import { refreshPage } from '../../utils/utils';
+// import { refreshPage } from '../../utils/utils';
 import { createPost } from '../../redux/actions/post.actions';
 
-export default function PostForm({ user }) {
+export default function PostForm(props) {
   const dispatch = useDispatch();
 
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
-  const { id } = user;
+  const { id } = props.user;
 
-  console.log(user);
-
-  const clearAll = () => {
-    setMessage('');
-    setImage('');
-  };
 
   const addPost = (e) => {
     e.preventDefault();
@@ -27,8 +21,6 @@ export default function PostForm({ user }) {
       message: message,
       image: image,
     };
-
-    console.log('envoyée !!!');
 
     dispatch(createPost(newPost));
   };
@@ -55,7 +47,7 @@ export default function PostForm({ user }) {
           />
         </ImageInput>
         <ButtonWrapper>
-          <button onClick={() => clearAll()}>Cancel</button>
+          <button onClick={() => props.toggleFunc()}  >Cancel</button>
           <button onClick={addPost}>Envoyer</button>
         </ButtonWrapper>
       </FormWrapper>

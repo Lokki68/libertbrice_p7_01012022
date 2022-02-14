@@ -1,14 +1,14 @@
 Arguments: 
-  /snap/node/5770/bin/node /usr/local/bin/yarn global dir --json
+  /snap/node/5880/bin/node /usr/local/bin/yarn global dir --json
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+  /home/lokki/.cache/activestate/bin:/home/lokki/.local/ActiveState/StateTool/release:/home/lokki/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
 
 Yarn version: 
   1.22.17
 
 Node version: 
-  16.13.2
+  16.14.0
 
 Platform: 
   linux x64
