@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { isEmpty } from '../../../utils/utils';
+import EditPostMessage from './EditPostMessage';
 
 export default function CardContent({ post }) {
+  const userId = parseInt(localStorage.getItem('UserId'), 10);
+
+  const [toggleEdit, setToggleEdit] = useState(false);
+
+  const handleToggle = () => {
+    setToggleEdit(!toggleEdit);
+  };
+
   return (
     <Container>
       <Content>
-        {!isEmpty(post.image) ? (
-          <img src={post.image} alt='' />
+        {!isEmpty(post.image) ? <img src={post.image} alt='' /> : ''}
+        {toggleEdit ? (
+          <EditPostMessage post={post} toggleFunc={handleToggle} />
+        ) : (
+          <p>{post.message}</p>
+        )}
+        {userId && userId === post.userId ? (
+          !toggleEdit ? (
+            <button
+              className='material-icons edit'
+              onClick={() => handleToggle()}
+            >
+              edit
+            </button>
+          ) : (
+            ''
+          )
         ) : (
           ''
         )}
-        <p>{post.message}</p>
-        <button className='material-icons'>edit</button>
       </Content>
     </Container>
   );
@@ -21,6 +43,7 @@ export default function CardContent({ post }) {
 // ----- Styled
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -41,7 +64,7 @@ const Content = styled.div`
     height: auto;
   }
 
-  button {
+  .edit {
     position: absolute;
     font-size: 18px;
     right: 5px;

@@ -11,7 +11,6 @@ import PostForm from './PostForm';
 export default function MainHome() {
   const dispatch = useDispatch();
   const postsData = useSelector((state) => state.postsReducer);
-  const { data } = useSelector((state) => state.userReducer);
 
   const [formToggle, setFormToggle] = useState(false);
 
@@ -21,12 +20,14 @@ export default function MainHome() {
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [postsData]);
+  }, []);/** //Todo : Régler le problème de rafraichissement  */ 
+  
+  
 
   return (
     <Container>
       {formToggle ? (
-        !isEmpty(data) && <PostForm user={data} toggleFunc={handleForm} />
+        <PostForm toggleFunc={handleForm} />
       ) : (
         <button onClick={handleForm}>Formulaire Post</button>
       )}

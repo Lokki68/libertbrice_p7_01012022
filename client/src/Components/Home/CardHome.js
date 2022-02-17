@@ -10,6 +10,8 @@ export default function CardHome({ post }) {
   const comments = post.comments;
   const likes = post.likes;
   const user = post.userId;
+  
+  
 
 
   return (

@@ -5,12 +5,12 @@ import { colors } from '../../utils/styles/colors';
 // import { refreshPage } from '../../utils/utils';
 import { createPost } from '../../redux/actions/post.actions';
 
-export default function PostForm(props) {
+export default function PostForm({ toggleFunc }) {
   const dispatch = useDispatch();
 
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
-  const { id } = props.user;
+  const id = parseInt(localStorage.getItem('UserId'), 10);
 
 
   const addPost = (e) => {
@@ -23,6 +23,7 @@ export default function PostForm(props) {
     };
 
     dispatch(createPost(newPost));
+    toggleFunc();
   };
 
   return (
@@ -47,7 +48,7 @@ export default function PostForm(props) {
           />
         </ImageInput>
         <ButtonWrapper>
-          <button onClick={() => props.toggleFunc()}  >Cancel</button>
+          <button onClick={() => toggleFunc()}>Cancel</button>
           <button onClick={addPost}>Envoyer</button>
         </ButtonWrapper>
       </FormWrapper>
