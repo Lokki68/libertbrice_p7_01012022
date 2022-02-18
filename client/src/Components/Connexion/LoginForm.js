@@ -31,6 +31,7 @@ export default function LoginForm({ success }) {
           passwordError.innerHTML = `<p>${res.data.pass}</p>`;
         } else {
           localStorage.setItem('UserId', res.data.userId);
+          localStorage.setItem('Token', res.data.token);
           window.location = '/home';
         }
       })

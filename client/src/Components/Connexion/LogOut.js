@@ -7,6 +7,7 @@ export default function LogOut() {
 
   const logOut = () => {
     removeLocalStorage('UserId');
+    removeLocalStorage('Token');
 
     window.location = '/';
   };

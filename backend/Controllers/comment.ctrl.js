@@ -34,7 +34,7 @@ exports.createComment = (req, res) => {
 };
 
 exports.updateComment = (req, res) => {
-  const token = req.header.authorization.split(' ')[1];
+  const token = req.body.header.split(' ')[1];
   const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
   const userId = decodedToken.userId
 
@@ -61,7 +61,7 @@ exports.updateComment = (req, res) => {
 };
 
 exports.deleteComment = (req, res) => {
-  const token = req.header.authorization.split(' ')[1];
+  const token = req.body.header.split(' ')[1];
   const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
   const userId = decodedToken.userId
 

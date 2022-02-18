@@ -32,8 +32,11 @@ export const createPost = (data) => {
 
 export const updatePost = (postId, data) => {
   return (dispatch) => {
+
     return axios
-      .put(`${config.API_REACT}/post/${postId}`, data)
+
+      .put(
+        `${config.API_REACT}/post/${postId}`, data)
       .then((res) => {
         console.log(res);
         dispatch({ type: UPDATE_POST, payload: res.data });

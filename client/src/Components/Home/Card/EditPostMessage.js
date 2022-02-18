@@ -5,16 +5,23 @@ import { updatePost } from '../../../redux/actions/post.actions';
 
 export default function EditPostMessage({ post, toggleFunc }) {
   const dispatch = useDispatch();
-
   const [message, setMessage] = useState('');
+
+  const token = localStorage.getItem('Token');
+  console.log(token);
 
   const handleMessage = (e) => {
     e.preventDefault();
+    const header = `Bearer ${token}`;
 
     const postId = post.id;
+    const data = {
+      message,
+      header,
+    };
 
-    dispatch(updatePost(postId, message))
-    toggleFunc()
+    dispatch(updatePost(postId, data));
+    toggleFunc();
   };
 
   const handleCancel = (e) => {
