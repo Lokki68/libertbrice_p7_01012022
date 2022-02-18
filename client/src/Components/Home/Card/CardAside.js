@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { colors } from '../../../utils/styles/colors';
 import { dateParser } from '../../../utils/utils';
 
-export default function CardAside({ likes, date, userId }) {
+export default function CardAside({ likes, date, userId, commentFunc }) {
   const { data } = useSelector((state) => state.usersReducer);
   const newDate = dateParser(date);
 
@@ -22,7 +22,9 @@ export default function CardAside({ likes, date, userId }) {
       <CommandPost>
         <button className='material-icons '>favorite_border</button>
         <span>{likes.length}</span>
-        <button className='material-icons'>comment</button>
+        <button className='material-icons' onClick={() => commentFunc()}>
+          comment
+        </button>
       </CommandPost>
     </CardAsideContainer>
   );

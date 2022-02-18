@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/styles/colors';
 
 import CardAside from './Card/CardAside';
 import CardComment from './Card/CardComment';
 import CardContent from './Card/CardContent';
+import PostComment from './Card/PostComment';
 
 export default function CardHome({ post }) {
+  const [commentEdit, setCommentEdit] = useState(false);
+
   const comments = post.comments;
   const likes = post.likes;
   const user = post.userId;
+  const postId = post.id;
   
+  const toggleComment = () => {
+    setCommentEdit(!commentEdit)
+  }
   
 
 
   return (
     <Container>
       <CardBox>
-        <CardAside likes={likes} date={post.date} userId={user} />
+        <CardAside likes={likes} date={post.date} userId={user} commentFunc={toggleComment} />
         <CardContent post={post} />
       </CardBox>
+      {commentEdit && <PostComment id={postId} commentFunc={toggleComment} />}
       {comments.length > 0 ? <CardComment comments={comments} /> : ''}
+
     </Container>
   );
 }

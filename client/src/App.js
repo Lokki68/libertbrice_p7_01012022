@@ -8,6 +8,7 @@ import Connexion from './Pages/Connexion';
 import Home from './Pages/Home';
 import Profil from './Pages/Profil';
 import Annuaire from './Pages/Annuaire';
+import NotFound from './Pages/NotFound';
 
 export default function App() {
   const [uid, setUid] = useState(null);
@@ -35,6 +36,7 @@ export default function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/profil' element={<Profil />} />
           <Route path='/annuaire' element={<Annuaire />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </UidContext.Provider>

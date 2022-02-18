@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function CardComment({ comments }) {
+export default function CardComment({ comments, commentOn }) {
+  console.log(commentOn);
+
   return (
     <Container>
       {comments.map((comment) => {
