@@ -4,12 +4,14 @@ import { colors } from '../../utils/styles/colors';
 import UpdateInfo from './UpdateInfo';
 import UploadPicture from './UploadPicture';
 
-export default function UpdateProfil() {
+export default function UpdateProfil({userData}) {
+
+  
   return (
     <Container>
       <Content>
-        <UploadPicture />
-        <UpdateInfo />
+        <UploadPicture username={userData.username} userpicture={userData.image}  admin={userData.admin} />
+        <UpdateInfo userData={userData} />
       </Content>
     </Container>
   );
@@ -25,7 +27,6 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: grid;
-  height: 100%;
   width: 100%;
   grid-template-columns: 30% 70%;
   grid-template-rows: 1fr;

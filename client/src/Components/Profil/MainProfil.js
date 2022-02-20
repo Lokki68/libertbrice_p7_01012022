@@ -1,13 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import UpdateProfil from './UpdateProfil';
 
 export default function MainProfil() {
-  return (
-    <Container>
-      <UpdateProfil />
-    </Container>
-  );
+  const { data } = useSelector((state) => state.userReducer);
+
+  return <Container>{data ? <UpdateProfil userData={data} /> : ''}</Container>;
 }
 
 const Container = styled.div`

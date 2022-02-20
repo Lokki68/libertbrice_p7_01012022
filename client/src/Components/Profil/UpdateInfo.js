@@ -1,67 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-export default function UpdateInfo() {
+export default function UpdateInfo({ userData }) {
+  const [mail, setMail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [bio, setBio] = useState('');
+
+  const { email, phoneNumber, description } = userData;
+
+  console.log(userData);
+
+  const handleSubmit = () => {};
+
   return (
     <Container>
-      <FormContainer>
-        <Info>
-          <input type='text' name='name' id='name' placeholder='name ...' />
-          <input
-            type='text'
-            name='firstName'
-            id='firstName'
-            placeholder='first name ...'
-          />
-          <input type='email' name='email' id='email' placeholder='Email ...' />
+      <Info>
+        <input
+          type='email'
+          name='email'
+          id='email'
+          placeholder={!email ? 'Email ...' : email}
+          onChange={(e) => setMail(e.target.value)}
+        />
 
-          <input
-            type='number'
-            name='phoneNumber'
-            id='phoneNumbe'
-            placeholder='Phone Number ...'
-          />
-        </Info>
-        <Description>
-          <label htmlFor='description'>Description :</label>
-          <textarea
-            name='description'
-            id='description'
-            cols='50'
-            rows='8'
-            placeholder='Description ...'
-          ></textarea>
-        </Description>
-        <Validation>
-          <input type='submit' value='Valider' />
-        </Validation>
-      </FormContainer>
+        <input
+          type='number'
+          name='phoneNumber'
+          id='phoneNumbe'
+          placeholder={!phoneNumber ? 'Phone Number ...' : phoneNumber}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+      </Info>
+      <Description>
+        <label htmlFor='description'>Description :</label>
+        <textarea
+          name='description'
+          id='description'
+          cols='50'
+          rows='8'
+          placeholder={!description ? 'Description ...' : description}
+          onChange={(e) => setBio(e.target.value)}
+        ></textarea>
+      </Description>
+      <Validation>
+        <input type='submit' value='Valider' onClick={() => handleSubmit()} />
+      </Validation>
     </Container>
   );
 }
 
 const Container = styled.div`
+  height: 580px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-`;
-
-const FormContainer = styled.form`
-  display: grid;
-  height: 100%;
-  width: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-areas:
-    'I'
-    'D'
-    'V';
 `;
 
 const Info = styled.div`
-  grid-area: I;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,12 +66,11 @@ const Info = styled.div`
   input {
     width: 180px;
     text-align: center;
-    margin: 10px 20px;
+    margin: 20px 20px;
   }
 `;
 
 const Description = styled.div`
-  grid-area: D;
   display: flex;
   justify-content: center;
   align-items: center;

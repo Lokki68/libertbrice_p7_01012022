@@ -1,38 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../utils/styles/colors';
 
-export default function UploadPicture() {
+export default function UploadPicture({ username, userpicture, admin }) {
+  const [userPicture, setUserpicture] = useState('');
+
+  const handleSubmit = () => {
+
+    const userId = localStorage.getItem('UserId');
+
+
+
+    const data = {
+      userPicture, 
+
+    }
+
+  }
+
+
   return (
     <Container>
-      <input type='text' name='username' id='username' placeholder='Username' />
-      <Admin>Admin</Admin>
+      <h1>
+        {username}
+      </h1>
+      {admin && <Admin> Admin </Admin>}
       <FormContainer>
-        <img src='./uploads/profils/random_user.jpg' alt='profil' />
+        <img src={userpicture} alt='profil' />
         <label htmlFor='image'>Photo de Profil</label>
-        <input type='file' name='image' id='image' accept='.jpg, .jpeg, .png' />
-
-        <input type='submit' value='Enregistrer' />
+        <input
+          type='file'
+          name='image'
+          id='image'
+          accept='.jpg, .jpeg, .png'
+          onChange={(e) => setUserpicture(e.target.files[0])}
+        />
       </FormContainer>
+      <input type='submit' value='Enregistrer' onClick={() => handleSubmit()} />
     </Container>
   );
 }
 
 const Container = styled.div`
+  height: 580px;
   grid-area: L;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
   margin-left: 5px;
 
-  input[type='text'] {
+  h1 {
     font-family: Roboto, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: .2rem;
+    font-weight: 600;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
   }
 `;
 
