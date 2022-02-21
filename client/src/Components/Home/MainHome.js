@@ -20,9 +20,7 @@ export default function MainHome() {
 
   useEffect(() => {
     dispatch(getPosts());
-  }, []);/** //Todo : Régler le problème de rafraichissement  */ 
-  
-  
+  }, [formToggle]);
 
   return (
     <Container>
@@ -64,6 +62,7 @@ const Container = styled.div`
 
 const ContainerHomeCard = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;

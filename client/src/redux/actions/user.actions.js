@@ -16,12 +16,11 @@ export const getUser = (uid) => {
   };
 };
 
-export const updateOne = (data, id) => {
+export const updateOne = (id, data) => {
   return (dispatch) => {
     return axios
       .put(`${config.API_REACT}/user/${id}`, data)
       .then((res) => {
-        console.log(res);
         return axios.get(`${config.API_REACT}/user/${id}`).then((res) => {
           dispatch({ type: UPDATE_ONE, payload: res });
         });

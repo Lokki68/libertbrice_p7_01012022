@@ -55,12 +55,7 @@ exports.updateUser = (req, res, next) => {
     email,
     description,
     phoneNumber,
-    image: '',
   };
-
-  if (req.file) {
-    userInfo.image = `../client/public/uploads/profils/${req.file.filename}`;
-  }
 
   User.update(userInfo, {
     where: { id },
