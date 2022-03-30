@@ -9,5 +9,3 @@ export const colors = {
   alert: '#591a1a',
   fond: '#e5e5e5',
 };
-
-
