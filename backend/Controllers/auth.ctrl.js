@@ -27,7 +27,7 @@ const maxAge = 3 * 24 * 60 * 60 * 1000; // Token Expiration
 
 // SignUp
 exports.signup = (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
 
   // Check PassWord
 
@@ -43,18 +43,19 @@ exports.signup = (req, res, next) => {
     .then((hash) => {
       const newUser = {
         username: username,
+        email: email,
         password: hash,
       };
 
       User.create(newUser)
-        .then((data) => {
+        .then((_) => {
           const msg = 'User Created';
-          res.status(200).json({ data, msg });
+          res.json({ status: 200, msg });
         })
-        .catch((err) => res.status(400).json({ err: err.message }));
+        .catch((err) => res.json({ status: 400, err: err.message }));
     })
 
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({ status: 500, err: err.message }));
 };
 
 // Login
@@ -82,8 +83,9 @@ exports.login = (req, res, next) => {
 
           // Password Ok
 
-          res.status(200).json({
-            userId: user[0].id,
+          res.json({
+            status: 200,
+            data: user[0],
             token: jwt.sign({ userId: user[0].id }, 'RANDOM_TOKEN_SECRET', {
               expiresIn: maxAge,
             }),

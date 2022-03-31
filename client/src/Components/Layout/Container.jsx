@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 import Header from './Header';
 
 export default function Container({ children }) {
   return (
-    <div>
+    <Fragment>
       <Header />
       <main>{children}</main>
-    </div>
+    </Fragment>
   );
 }
+
+// ----- Styled

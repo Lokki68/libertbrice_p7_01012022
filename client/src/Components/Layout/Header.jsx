@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 
-import logoHeader from '../../img/logo_header_white.jpg';
 import { VscGlobe } from 'react-icons/vsc';
 
 export default function Header() {
@@ -41,7 +40,9 @@ export default function Header() {
   );
 }
 
-const Container = styled.div`
+// ----- Styled
+
+const Container = styled.header`
   height: 90px;
   width: 100%;
   background-color: ${colors.tertiary};

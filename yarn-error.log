@@ -1,5 +1,5 @@
 Arguments: 
-  /snap/node/5880/bin/node /usr/local/bin/yarn global dir --json
+  /snap/node/5953/bin/node /usr/local/bin/yarn global dir --json
 
 PATH: 
   /home/lokki/.cache/activestate/bin:/home/lokki/.local/ActiveState/StateTool/release:/home/lokki/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin

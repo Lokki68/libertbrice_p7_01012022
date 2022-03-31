@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const saveUser = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/user/signup`, data)
+    .post(`http://localhost:8080/api/user/signup`, data)
     .then((res) => {
       return res.data;
     })
@@ -11,9 +11,9 @@ export const saveUser = (data) => {
 
 export const loginUser = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/user/login`, data)
+    .post(`http://localhost:8080/api/user/login`, data)
     .then((res) => {
       return res.data;
     })
     .catch((err) => console.log({ err: err.message }));
-}
+};
