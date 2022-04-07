@@ -3,7 +3,6 @@ const multer = require('../middleWare/multer.user.config');
 
 // Controllers
 const userCtrl = require('../Controllers/user.ctrl');
-const authCtrl = require('../Controllers/auth.ctrl');
 const multerUserConfig = require('../middleWare/multer.user.config');
 
 // R.U.D.
@@ -14,11 +13,7 @@ router.put('/:id', userCtrl.updateUser);
 
 router.delete('/:id', userCtrl.deleteUser);
 
-// Auth
-router.post('/signup', authCtrl.signup);
-router.post('/login', authCtrl.login);
-
 // Upload Picture
 
-router.put('/upload/:id', multerUserConfig , userCtrl.uploadPicture)
+router.put('/upload/:id', multerUserConfig, userCtrl.uploadPicture);
 module.exports = router;

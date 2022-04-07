@@ -59,7 +59,7 @@ exports.signup = (req, res, next) => {
 };
 
 // Login
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   const { username, password } = req.body;
 
   User.findAll({
@@ -86,7 +86,7 @@ exports.login = (req, res, next) => {
           res.json({
             status: 200,
             data: user[0],
-            token: jwt.sign({ userId: user[0].id }, 'RANDOM_TOKEN_SECRET', {
+            token: jwt.sign({ userId: user[0].id }, process.env.TOKEN_SECRET, {
               expiresIn: maxAge,
             }),
           });
@@ -94,4 +94,23 @@ exports.login = (req, res, next) => {
         .catch((err) => res.status(500).json({ err: err.message }));
     })
     .catch((err) => res.status(500).json({ err: err.message }));
+};
+
+//verifToken
+
+exports.verifToken = (req, res) => {
+  const { id, token } = req.body;
+  const { userId } = jwt.verify(token, process.env.TOKEN_SECRET);
+
+  if (parseInt(id) === parseInt(userId)) {
+    User.findAll({
+      where: { id },
+    })
+      .then((user) => {
+        res.json({ status: 200, data: user[0], msg: 'user found' });
+      })
+      .catch((err) => res.json({ status: 404, msg: 'User not found' }));
+  } else {
+    res.json({ status: 500, msg: 'Error' });
+  }
 };

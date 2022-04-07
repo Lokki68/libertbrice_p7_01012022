@@ -1,15 +1,40 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { loginUser } from '../../Api/user';
 import { colors } from '../../Utils/styles/color';
 
 export default function Login() {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    const data = {
+      username,
+      password,
+    };
+
+    loginUser(data)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          window.localStorage.setItem('groupomania-token', res.token);
+          window.localStorage.setItem('groupomania-id', res.data.id);
+          navigate('/');
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Container>
-      <Formulaire>
+      <Formulaire
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <div>
           <h1>Se connecter</h1>
         </div>
@@ -19,17 +44,19 @@ export default function Login() {
             name='username'
             id='username'
             placeholder="Nom d'utilisateur"
+            required
             value={username}
             onInput={(e) => setUsername(e.target.value)}
           />
         </div>
-        
+
         <div className='info password'>
           <input
             type='password'
             name='password'
             id='password'
             placeholder='Votre mot de passe'
+            required
             value={password}
             onInput={(e) => setPassword(e.target.value)}
           />

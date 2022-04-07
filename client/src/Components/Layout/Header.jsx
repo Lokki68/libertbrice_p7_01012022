@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 
 import { VscGlobe } from 'react-icons/vsc';
 
 export default function Header() {
-  const [isLogged, setLogged] = useState(false);
+  const { isLogged } = useSelector((state) => state.user);
 
   return (
     <Container>
