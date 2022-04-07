@@ -1,12 +1,16 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import styled from 'styled-components';
-import Home from './Components/Home';
 
 import Container from './Components/Layout/Container';
 import Login from './Components/User/Login';
 import Register from './Components/User/Register';
 import RequireAuth from './Utils/RequireAuth';
+import Home from './Components/Home';
+import Topics from './Components/Topic/Topics';
+import Annuaire from './Components/Annuaire/Annuaire';
+import Profil from './Components/Profil/Profil';
 
 export default function App() {
   return (
@@ -18,6 +22,30 @@ export default function App() {
             element={
               <RequireAuth withAuth={true}>
                 <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/topics'
+            element={
+              <RequireAuth withAuth={true}>
+                <Topics />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/annuaire'
+            element={
+              <RequireAuth withAuth={true}>
+                <Annuaire />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/profil'
+            element={
+              <RequireAuth withAuth={true}>
+                <Profil />
               </RequireAuth>
             }
           />

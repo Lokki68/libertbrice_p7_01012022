@@ -1,13 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 
 import { VscGlobe } from 'react-icons/vsc';
+import { logoutUserReducer } from '../../Redux/User/userReducer';
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isLogged } = useSelector((state) => state.user);
+
+  const onLogout = () => {
+    localStorage.removeItem('groupomania-token');
+    localStorage.removeItem('groupomania-id');
+    dispatch(logoutUserReducer());
+    navigate('/login');
+  };
 
   return (
     <Container>
@@ -17,15 +27,18 @@ export default function Header() {
       </LogoContainer>
       {isLogged ? (
         <NavMainContainer>
+          <NavLink to='/topics' className='btn'>
+            Topic
+          </NavLink>
           <NavLink to='/annuaire' className='btn'>
             Annuaire
           </NavLink>
           <NavLink to='/profil' className='btn'>
             Profil
           </NavLink>
-          <NavLink to='/' className='btn'>
-            Se déconnecter
-          </NavLink>
+          <button className='btn' onClick={onLogout}>
+            Déconnection
+          </button>
         </NavMainContainer>
       ) : (
         <NavConnectContainer>
@@ -63,6 +76,7 @@ const Container = styled.header`
     height: 35px;
     color: ${colors.white};
     text-decoration: none;
+    border: none;
     background-color: ${colors.tertiary};
     box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.white};
     font-size: 16px;

@@ -19,8 +19,8 @@ export default function Login() {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          window.localStorage.setItem('groupomania-token', res.token);
-          window.localStorage.setItem('groupomania-id', res.data.id);
+          localStorage.setItem('groupomania-token', res.token);
+          localStorage.setItem('groupomania-id', res.data.id);
           navigate('/');
         }
       })
