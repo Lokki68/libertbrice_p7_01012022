@@ -25,14 +25,7 @@ export default function App() {
               </RequireAuth>
             }
           />
-          <Route
-            path='/topics'
-            element={
-              <RequireAuth withAuth={true}>
-                <Topics />
-              </RequireAuth>
-            }
-          />
+
           <Route
             path='/annuaire'
             element={

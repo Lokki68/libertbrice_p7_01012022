@@ -11,28 +11,27 @@ export default function RequireAuth({ children, withAuth }) {
 
   useEffect(() => {
     if (!user.isLogged && withAuth) {
-      const token = window.localStorage.getItem('groupomania-token');
+      const token = localStorage.getItem('groupomania-token');
       if (token === null) {
         return navigate('/login');
       } else {
-        const id = window.localStorage.getItem('groupomania-id');
+        const id = localStorage.getItem('groupomania-id');
         const data = { token, id };
 
-        console.log(data);
         checkToken(data)
           .then((res) => {
-            console.log(res.data);
             if (res.status === 200) {
               dispatch(loginUserReducer(res.data));
             } else {
-              window.localStorage.removeItem('groupomania-token');
+              localStorage.removeItem('groupomania-token');
+              localStorage.removeItem('groupomania-id');
               navigate('/login');
             }
           })
           .catch((err) => {
-            console.log(err);
-            /*  window.localStorage.removeItem('groupomania-token');
-            navigate('/login'); */
+            localStorage.removeItem('groupomania-token');
+            localStorage.removeItem('groupomania-id');
+            navigate('/login');
           });
       }
     }

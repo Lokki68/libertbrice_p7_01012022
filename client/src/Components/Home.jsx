@@ -1,24 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUsersReducer } from '../Redux/User/usersReducer';
 import { getAllUsers } from '../Api/user';
 import styled from 'styled-components';
 import { VscGlobe } from 'react-icons/vsc';
+import Topics from './Topic/Topics';
 
 export default function Home() {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
     getAllUsers().then((res) => {
-      console.log(res);
       dispatch(getUsersReducer(res.data));
     });
   }, []);
 
   return (
     <Container>
-      <VscGlobe size={50} color={'white'} />
-      <h1>Bienvenue sur Groupomania</h1>
+      {!isLoaded ? (
+        <div>
+          <VscGlobe size={50} color={'white'} />
+          <h1>Bienvenue sur Groupomania</h1>
+        </div>
+      ) : (
+        <Topics />
+      )}
     </Container>
   );
 }

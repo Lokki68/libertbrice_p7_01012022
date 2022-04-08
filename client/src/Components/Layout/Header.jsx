@@ -27,8 +27,8 @@ export default function Header() {
       </LogoContainer>
       {isLogged ? (
         <NavMainContainer>
-          <NavLink to='/topics' className='btn'>
-            Topic
+          <NavLink to='/' className='btn'>
+            Home
           </NavLink>
           <NavLink to='/annuaire' className='btn'>
             Annuaire
