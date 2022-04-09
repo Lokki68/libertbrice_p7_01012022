@@ -5,7 +5,8 @@ import { getAllUsers } from '../Api/user';
 import styled from 'styled-components';
 import { VscGlobe } from 'react-icons/vsc';
 import Posts from './Post/Posts';
-import { getPosts } from '../Api/topics';
+import { getAllPosts } from '../Api/posts';
+import { getAllPostsReducer } from '../Redux/Posts/postsReducer';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -16,9 +17,9 @@ export default function Home() {
       dispatch(getUsersReducer(res.data));
     });
 
-    getPosts().then((res) => {
-      console.log(res);
+    getAllPosts().then((res) => {
       setIsLoaded(!isLoaded);
+      dispatch(getAllPostsReducer(res));
     });
   }, []);
 
