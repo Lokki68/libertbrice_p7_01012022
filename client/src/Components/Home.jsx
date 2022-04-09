@@ -4,15 +4,21 @@ import { getUsersReducer } from '../Redux/User/usersReducer';
 import { getAllUsers } from '../Api/user';
 import styled from 'styled-components';
 import { VscGlobe } from 'react-icons/vsc';
-import Topics from './Topic/Topics';
+import Posts from './Post/Posts';
+import { getPosts } from '../Api/topics';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     getAllUsers().then((res) => {
       dispatch(getUsersReducer(res.data));
+    });
+
+    getPosts().then((res) => {
+      console.log(res);
+      setIsLoaded(!isLoaded);
     });
   }, []);
 
@@ -24,7 +30,7 @@ export default function Home() {
           <h1>Bienvenue sur Groupomania</h1>
         </div>
       ) : (
-        <Topics />
+        <Posts />
       )}
     </Container>
   );

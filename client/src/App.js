@@ -8,7 +8,6 @@ import Login from './Components/User/Login';
 import Register from './Components/User/Register';
 import RequireAuth from './Utils/RequireAuth';
 import Home from './Components/Home';
-import Topics from './Components/Topic/Topics';
 import Annuaire from './Components/Annuaire/Annuaire';
 import Profil from './Components/Profil/Profil';
 

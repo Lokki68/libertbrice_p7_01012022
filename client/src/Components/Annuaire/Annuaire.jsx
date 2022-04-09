@@ -9,6 +9,7 @@ import Loader from '../Layout/Loader';
 import { getAllUsers } from '../../Api/user';
 import { getUsersReducer } from '../../Redux/User/usersReducer';
 import CardAnnuaire from './CardAnnuaire';
+import AnnuaireSquelette from '../Squelette/AnnuaireSquelette';
 
 export default function Annuaire() {
   const dispatch = useDispatch();
@@ -48,20 +49,20 @@ export default function Annuaire() {
           }}
         />
       </SearchBar>
-      {isEmpty(data) ? (
-        <Loader />
-      ) : (
-        <Content>
-          {search.length >= 1
-            ? !isEmpty(dataFiltered) &&
-              dataFiltered.map((user) => {
-                return user && <CardAnnuaire user={user} key={user.id} />;
-              })
-            : data.map((user) => {
-                return user && <CardAnnuaire user={user} key={user.id} />;
-              })}
-        </Content>
-      )}
+      <Content>
+        {isEmpty(data) ? (
+          <AnnuaireSquelette />
+        ) : search.length >= 1 ? (
+          !isEmpty(dataFiltered) &&
+          dataFiltered.map((user) => {
+            return user && <CardAnnuaire user={user} key={user.id} />;
+          })
+        ) : (
+          data.map((user) => {
+            return user && <CardAnnuaire user={user} key={user.id} />;
+          })
+        )}
+      </Content>
     </Container>
   );
 }
