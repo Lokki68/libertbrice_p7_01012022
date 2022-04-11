@@ -5,11 +5,10 @@ import styled from 'styled-components';
 import { VscSearch } from 'react-icons/vsc';
 import { colors } from '../../Utils/styles/color';
 import { isEmpty } from '../../Utils/utils';
-import Loader from '../Layout/Loader';
 import { getAllUsers } from '../../Api/user';
 import { getUsersReducer } from '../../Redux/User/usersReducer';
 import CardAnnuaire from './CardAnnuaire';
-import AnnuaireSquelette from '../Squelette/AnnuaireSquelette';
+import AnnuaireSquelette from './AnnuaireSquelette';
 
 export default function Annuaire() {
   const dispatch = useDispatch();
@@ -69,11 +68,15 @@ export default function Annuaire() {
 
 // ----- Styled
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding-top: 10px;
+  height: calc(100vh - 90px);
+  background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
+`;
 
 const SearchBar = styled.div`
   position: relative;
-  margin: 15px auto;
+  margin: 0px auto;
   padding: 0 15px;
   width: 30%;
   border-radius: 5px;

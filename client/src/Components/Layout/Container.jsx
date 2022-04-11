@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+
 import Header from './Header';
 
 export default function Container({ children }) {
@@ -9,5 +10,3 @@ export default function Container({ children }) {
     </Fragment>
   );
 }
-
-// ----- Styled

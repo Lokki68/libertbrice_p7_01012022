@@ -45,7 +45,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
-
   h1 {
     font-size: 3em;
     margin-left: 1rem;
