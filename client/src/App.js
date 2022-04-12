@@ -10,6 +10,7 @@ import RequireAuth from './Utils/RequireAuth';
 import Home from './Components/Home';
 import Annuaire from './Components/Annuaire/Annuaire';
 import Profil from './Components/Profil/Profil';
+import ProfilForm from './Components/Profil/ProfilForm';
 
 export default function App() {
   return (
@@ -38,6 +39,14 @@ export default function App() {
             element={
               <RequireAuth withAuth={true}>
                 <Profil />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/profilform'
+            element={
+              <RequireAuth withAuth={true}>
+                <ProfilForm />
               </RequireAuth>
             }
           />

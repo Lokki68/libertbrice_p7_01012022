@@ -1,86 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { getUserInfo } from '../../Api/user';
+import { loadUserInfosReducer } from '../../Redux/User/userReducer';
 import { colors } from '../../Utils/styles/color';
 import { isEmpty } from '../../Utils/utils';
+
 import ProfilSquelette from './ProfilSquelette';
 
 export default function Profil() {
+  const dispatch = useDispatch();
   const { infos } = useSelector((state) => state.user);
 
-  const [image, setImage] = useState();
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-
-  console.log(infos);
-
   useEffect(() => {
-    if (infos !== null) {
-      setImage(infos.image);
-      setUsername(infos.username);
-      setEmail(infos.email);
-      setPhoneNumber(infos.phoneNumber);
-    }
-  }, [infos]);
-
-  const handleSubmit = () => {
-    const data = {
-      username,
-    };
-
-    console.log('submit', data);
-  };
+    const id = localStorage.getItem('groupomania-id');
+    getUserInfo(id).then((res) => {
+      dispatch(loadUserInfosReducer(res.data));
+    });
+  }, []);
 
   return (
     <Container>
       {!isEmpty(infos) ? (
-        <Formulaire
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-        >
-          <div>
-            <h1>Mon Profil</h1>
-          </div>
+        <Card>
+          <Picture>
+            <img src={infos.image} alt='profil' />
+            {infos.admin !== false ? (
+              <span className='material-icons'>star</span>
+            ) : (
+              ''
+            )}
+          </Picture>
+          <InfoCard>
+            <h3>{infos.username}</h3>
+            <p>{infos.email}</p>
+            <p>{infos.phoneNumber}</p>
+          </InfoCard>
 
-          <div className='info profil-picture'>
-            <img src={image} alt='profil' />
-            <label htmlFor='image'>Photo de profil</label>
-            <input type='file' id='image' accept='.jpg, .jpeg, .png' />
-          </div>
-
-          <div className='info'>
-            <input
-              type='text'
-              name='username'
-              id='username'
-              value={username}
-              placeholder="Nom d'utilisateur"
-              onInput={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className='info'>
-            <input
-              type='email'
-              name='email'
-              id='email'
-              value={email}
-              placeholder='Adresse Mail'
-            />
-          </div>
-          <div className='info password'>
-            <input
-              type='number'
-              name='phoneNumber'
-              id='phoneNumber'
-              value={phoneNumber}
-              placeholder='Votre numéro de poste'
-            />
-          </div>
-          <button>Envoyer</button>
-        </Formulaire>
+          <NavLink to='/profilform'>Modifier</NavLink>
+        </Card>
       ) : (
         <ProfilSquelette />
       )}
@@ -94,75 +53,76 @@ const Container = styled.div`
   padding-top: 10px;
   height: calc(100vh - 90px);
   background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Formulaire = styled.form`
-  width: 50%;
-  height: 75%;
-  margin: 50px auto;
-  padding: 20px;
-  background: url('../../img/logo_planete.jpg') no-repeat center/cover;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
-
+const Card = styled.div`
+  position: relative;
+  width: 80%;
+  height: 70%;
+  margin: auto;
+  background-color: url('../../img/logo_planete.jpg') no-repeat center/cover;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
 
-  .info input {
-    outline: none;
-    border: none;
-    border-bottom: 1px solid #000;
-    width: 80%;
-  }
-
-  .profil-picture {
+  a {
+    position: absolute;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    img {
-      width: 160px;
-      height: 160px;
-      border-radius: 4px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    label {
-      margin: 15px;
-      padding: 8px;
-      background-color: ${colors.primary};
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${colors.secondary};
-      }
-    }
-
-    input[type='file'] {
-      display: none;
-    }
-  }
-
-  .info.password input {
-    margin-top: 15px;
-  }
-
-  button {
-    border: none;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 30%;
+    height: 40px;
     color: #fff;
-    background-color: ${colors.tertiary};
-    box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.primary};
     font-size: 20px;
-    font-family: Roboto, sans-serif;
-    margin: 0 15px;
+    background-color: ${colors.tertiary};
+    cursor: pointer;
+    box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.primary};
 
     &:hover {
       box-shadow: 2px 2px 2px ${colors.primary},
         inset 2px 2px 2px ${colors.black};
       color: ${colors.black};
     }
+  }
+`;
+
+const Picture = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 90%;
+    height: 70%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+`;
+
+const InfoCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+  font-family: Inconsolata, sans-serif;
+
+  h3 {
+    font-size: 5rem;
+  }
+
+  p {
+    font-size: 3rem;
   }
 `;

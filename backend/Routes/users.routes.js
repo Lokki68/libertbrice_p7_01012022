@@ -16,4 +16,6 @@ router.delete('/:id', userCtrl.deleteUser);
 // Upload Picture
 
 router.put('/upload/:id', multerUserConfig, userCtrl.uploadPicture);
+
+
 module.exports = router;

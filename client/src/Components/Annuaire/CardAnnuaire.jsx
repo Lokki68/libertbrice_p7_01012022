@@ -135,7 +135,7 @@ const InfoModal = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  width: 75%;
+  width: 70%;
   height: inherit;
 `;
 

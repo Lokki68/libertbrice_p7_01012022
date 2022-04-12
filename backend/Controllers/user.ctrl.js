@@ -48,12 +48,12 @@ exports.getById = (req, res, next) => {
 
 // Update User
 exports.updateUser = (req, res, next) => {
-  const { email, description, phoneNumber } = req.body;
+  const { email, username, phoneNumber } = req.body;
   const id = req.params.id;
 
   const userInfo = {
     email,
-    description,
+    username,
     phoneNumber,
   };
 
