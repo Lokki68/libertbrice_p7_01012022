@@ -42,11 +42,11 @@ export default function ProfilForm() {
       dispatch(loadUserInfosReducer(res.data));
     });
 
-    updatePictureUser(id, image).then((res) => {
+    /* updatePictureUser(id, image).then((res) => {
       console.log(res);
-    });
+    }); */
 
-    // navigate('/profil');
+    navigate('/profil');
   };
 
   return (
@@ -100,6 +100,15 @@ export default function ProfilForm() {
             />
           </div>
           <button>Envoyer</button>
+          <button
+            className='close'
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/profil');
+            }}
+          >
+            X
+          </button>
         </Formulaire>
       ) : (
         <ProfilFormSquelette />
@@ -117,6 +126,7 @@ const Container = styled.div`
 `;
 
 const Formulaire = styled.form`
+  position: relative;
   width: 50%;
   height: 75%;
   margin: 50px auto;
@@ -187,5 +197,21 @@ const Formulaire = styled.form`
         inset 2px 2px 2px ${colors.black};
       color: ${colors.black};
     }
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    font-size: 1rem;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
