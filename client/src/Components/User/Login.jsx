@@ -17,7 +17,6 @@ export default function Login() {
 
     loginUser(data)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           localStorage.setItem('groupomania-token', res.token);
           localStorage.setItem('groupomania-id', res.data.id);

@@ -11,6 +11,8 @@ import Home from './Components/Home';
 import Annuaire from './Components/Annuaire/Annuaire';
 import Profil from './Components/Profil/Profil';
 import ProfilForm from './Components/Profil/ProfilForm';
+import PostForm from './Components/Post/PostForm';
+import PostDetail from './Components/Post/PostDetail';
 
 export default function App() {
   return (
@@ -22,6 +24,23 @@ export default function App() {
             element={
               <RequireAuth withAuth={true}>
                 <Home />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path='/post/:id'
+            element={
+              <RequireAuth withAuth={true}>
+                <PostDetail />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/postform'
+            element={
+              <RequireAuth withAuth={true}>
+                <PostForm />
               </RequireAuth>
             }
           />

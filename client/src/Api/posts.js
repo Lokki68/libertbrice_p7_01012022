@@ -8,3 +8,19 @@ export const getAllPosts = () => {
     })
     .catch((err) => console.log({ err: err.message }));
 };
+
+export const getOnePost = (id) => {
+  return axios
+    .get(`http://localhost:8080/api/post/${id}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log({ err: err.message }));
+};
+
+export const createPost = (data) => {
+  return axios
+    .post('http://localhost:8080/api/post', data)
+    .then((res) => res.data)
+    .catch((err) => console.log({ err: err.message }));
+};

@@ -8,7 +8,6 @@ const User = db.users;
 const Comment = db.comments;
 const Like = db.likes;
 
-// Find All Post
 exports.getAllPost = (req, res, next) => {
   Post.findAll({
     include: [
@@ -30,7 +29,6 @@ exports.getAllPost = (req, res, next) => {
     .catch((err) => res.status(400).json({ err: err.message }));
 };
 
-// Find One Post
 exports.getById = (req, res, next) => {
   const id = req.params.id;
 
@@ -51,7 +49,6 @@ exports.getById = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-// Find Post By User Id
 exports.getByUserId = (req, res, next) => {
   const id = req.params.id;
 
@@ -78,7 +75,6 @@ exports.getByUserId = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-// Create Post
 exports.createPost = (req, res, next) => {
   const { userId, message } = req.body;
 
@@ -102,7 +98,6 @@ exports.createPost = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-// Update Post
 exports.updatePost = (req, res, next) => {
   const token = req.body.header.split(' ')[1];
   const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
@@ -127,7 +122,6 @@ exports.updatePost = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-// Delete Post
 exports.deletePost = (req, res, next) => {
   const token = req.body.header.split(' ')[1];
   const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');

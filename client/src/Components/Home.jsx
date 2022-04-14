@@ -7,6 +7,7 @@ import { VscGlobe } from 'react-icons/vsc';
 import Posts from './Post/Posts';
 import { getAllPosts } from '../Api/posts';
 import { getAllPostsReducer } from '../Redux/Posts/postsReducer';
+import { colors } from '../Utils/styles/color';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -49,5 +50,26 @@ const Container = styled.div`
     font-size: 3em;
     margin-left: 1rem;
     color: #fff;
+  }
+
+  .new-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 200px;
+    margin: 0 10px;
+    background-color: ${colors.primary};
+    border-radius: 5px;
+    color: #333;
+    font-weight: bold;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+
+    &:hover {
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+      background-color: ${colors.secondary};
+      color: #f1f1f1;
+    }
   }
 `;

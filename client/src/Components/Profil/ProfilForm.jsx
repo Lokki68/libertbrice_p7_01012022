@@ -18,8 +18,6 @@ export default function ProfilForm() {
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
 
-  console.log(infos);
-
   useEffect(() => {
     if (infos !== null) {
       setImage(infos.image);
@@ -59,7 +57,7 @@ export default function ProfilForm() {
           }}
         >
           <div className='info profil-picture'>
-            <img src={image} alt='profil' />
+            <img src={infos.image} alt='profil' />
             <label htmlFor='image'>Photo de profil</label>
             <input
               type='file'
@@ -190,7 +188,6 @@ const Formulaire = styled.form`
     box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.primary};
     font-size: 20px;
     font-family: Roboto, sans-serif;
-    margin: 0 15px;
 
     &:hover {
       box-shadow: 2px 2px 2px ${colors.primary},

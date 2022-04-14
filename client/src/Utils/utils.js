@@ -7,7 +7,7 @@ export const isEmpty = (value) => {
   );
 };
 
-/* export const dateParser = (value) => {
+export const dateParser = (value) => {
   let option = {
     hour: '2-digit',
     minute: '2-digit',
@@ -16,4 +16,10 @@ export const isEmpty = (value) => {
     month: 'short',
     day: 'numeric',
   };
-}; */
+
+  let timestamp = Date.parse(value);
+
+  let date = new Date(timestamp).toLocaleString('fr-FR', option);
+
+  return date.toString();
+};
