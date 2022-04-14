@@ -24,3 +24,12 @@ export const createPost = (data) => {
     .then((res) => res.data)
     .catch((err) => console.log({ err: err.message }));
 };
+
+export const deletePost = (id) => {
+  return axios
+    .delete(`http://localhost:8080/api/post/${id}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log({ err: err.message }));
+};

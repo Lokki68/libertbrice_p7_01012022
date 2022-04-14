@@ -19,7 +19,9 @@ export default function PostForm() {
     };
 
     createPost(data).then((res) => {
-      console.log(res);
+      if (res.status === 200) {
+        navigate('/');
+      }
     });
 
     console.log(data);

@@ -93,7 +93,7 @@ exports.createPost = (req, res, next) => {
   Post.create(post)
     .then((data) => {
       const msg = `Post Created`;
-      res.status(200).json({ msg, data });
+      res.json({ status: 200, msg, data });
     })
     .catch((err) => res.status(500).json({ err: err.message }));
 };
@@ -123,27 +123,19 @@ exports.updatePost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  const token = req.body.header.split(' ')[1];
-  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-  const userId = decodedToken.userId;
-
   const id = req.params.id;
 
   Post.findByPk(id)
     .then((post) => {
-      if (post.userId === userId) {
-        Post.destroy({
-          where: { id },
+      Post.destroy({
+        where: { id },
+      })
+        .then((postDelete) => {
+          if (postDelete == 0)
+            return res.status(404).json({ msg: 'Not Found' });
+          res.status(200).json({ msg: 'Post deleted' });
         })
-          .then((postDelete) => {
-            if (postDelete == 0)
-              return res.status(404).json({ msg: 'Not Found' });
-            res.status(200).json({ msg: 'Post deleted' });
-          })
-          .catch((err) => res.status(500).json({ err: err.message }));
-      } else {
-        res.status(404).json({ msg: 'Bad request' });
-      }
+        .catch((err) => res.status(500).json({ err: err.message }));
     })
     .catch((err) => res.status(500).json({ err: err.message }));
 };
