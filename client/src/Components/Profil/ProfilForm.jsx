@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { updatePictureUser, updateUser } from '../../Api/user';
+import { /*updatePictureUser, */ updateUser } from '../../Api/user';
 import { loadUserInfosReducer } from '../../Redux/User/userReducer';
 import { colors } from '../../Utils/styles/color';
 import { isEmpty } from '../../Utils/utils';
@@ -39,6 +39,8 @@ export default function ProfilForm() {
     updateUser(id, data).then((res) => {
       dispatch(loadUserInfosReducer(res.data));
     });
+
+    console.log(image);
 
     /* updatePictureUser(id, image).then((res) => {
       console.log(res);

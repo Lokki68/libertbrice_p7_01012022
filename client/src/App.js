@@ -13,6 +13,7 @@ import Profil from './Components/Profil/Profil';
 import ProfilForm from './Components/Profil/ProfilForm';
 import PostForm from './Components/Post/PostForm';
 import PostDetail from './Components/Post/PostDetail';
+import CommentForm from './Components/Post/CommentForm';
 
 export default function App() {
   return (
@@ -31,7 +32,7 @@ export default function App() {
           <Route
             path='/post/:id'
             element={
-              <RequireAuth withAuth={true}>
+              <RequireAuth withAuth={false}>
                 <PostDetail />
               </RequireAuth>
             }
@@ -41,6 +42,14 @@ export default function App() {
             element={
               <RequireAuth withAuth={true}>
                 <PostForm />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/post/:id/commentForm'
+            element={
+              <RequireAuth withAuth={true}>
+                <CommentForm />
               </RequireAuth>
             }
           />

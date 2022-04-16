@@ -28,15 +28,15 @@ exports.createComment = (req, res) => {
   Comment.create(comment)
     .then((data) => {
       const msg = `CommentCreated`;
-      res.status(200).json({ msg, data });
+      res.json({ status: 200, msg, data });
     })
     .catch((err) => res.status(400).json({ err: err.message }));
 };
 
 exports.updateComment = (req, res) => {
   const token = req.body.header.split(' ')[1];
-  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
-  const userId = decodedToken.userId
+  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+  const userId = decodedToken.userId;
 
   const id = req.params.id;
   const { body } = req;
@@ -62,8 +62,8 @@ exports.updateComment = (req, res) => {
 
 exports.deleteComment = (req, res) => {
   const token = req.body.header.split(' ')[1];
-  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET')
-  const userId = decodedToken.userId
+  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+  const userId = decodedToken.userId;
 
   const id = req.params.id;
 
