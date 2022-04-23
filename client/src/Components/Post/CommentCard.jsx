@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 import { dateParser } from '../../Utils/utils';
-import {deleteComment} from "../../Api/comment";
-import {useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 export default function CommentCard({ data, users }) {
   const navigate = useNavigate();
@@ -20,14 +19,7 @@ export default function CommentCard({ data, users }) {
 
   }, []);
 
-  const handleDelete = () => {
-    const id  = data.id;
-    deleteComment(id).then(res => {
-      if(res.status === 200){
-        navigate(`/`)
-      }
-    } )
-  }
+
 
   return (
     <Container>
@@ -45,10 +37,7 @@ export default function CommentCard({ data, users }) {
             <AdminComment>
               <button
                 className='material-icons'
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleDelete()
-                }}
+                onClick={ () => navigate(`/post/delete/${data.id}`)}
               >delete</button>
               <button className='material-icons'>edit</button>
             </AdminComment>

@@ -52,7 +52,7 @@ export default function Profil() {
 const Container = styled.div`
   padding-top: 10px;
   height: calc(100vh - 90px);
-  background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
+  background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: center;

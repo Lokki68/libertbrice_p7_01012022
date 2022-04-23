@@ -14,6 +14,7 @@ import ProfilForm from './Components/Profil/ProfilForm';
 import PostForm from './Components/Post/PostForm';
 import PostDetail from './Components/Post/PostDetail';
 import CommentForm from './Components/Post/CommentForm';
+import DeleteComment from "./Components/Post/DeleteComment";
 
 export default function App() {
   return (
@@ -34,6 +35,14 @@ export default function App() {
             element={
               <RequireAuth withAuth={false}>
                 <PostDetail />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/post/delete/:id'
+            element={
+              <RequireAuth withAuth={false}>
+                <DeleteComment />
               </RequireAuth>
             }
           />

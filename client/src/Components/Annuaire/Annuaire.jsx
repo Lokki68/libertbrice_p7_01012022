@@ -71,7 +71,7 @@ export default function Annuaire() {
 const Container = styled.div`
   padding-top: 10px;
   height: calc(100vh - 90px);
-  background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
+  background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
 `;
 
 const SearchBar = styled.div`
