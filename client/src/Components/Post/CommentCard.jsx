@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 import { dateParser } from '../../Utils/utils';
+import {deleteComment} from "../../Api/comment";
+import {useNavigate} from "react-router-dom";
 
 export default function CommentCard({ data, users }) {
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('groupomania-id');
   const [posterUserName, setPosterUserName] = useState('');
+
 
   useEffect(() => {
     if (users.length > 0) {
@@ -12,9 +17,18 @@ export default function CommentCard({ data, users }) {
 
       setPosterUserName(user[0].username);
     }
+
   }, []);
 
-  console.log(data);
+  const handleDelete = () => {
+    const {postId} = data;
+    const id  = data.id;
+    deleteComment(id).then(res => {
+      if(res.status === 200){
+        navigate(`/`)
+      }
+    } )
+  }
 
   return (
     <Container>
@@ -26,10 +40,22 @@ export default function CommentCard({ data, users }) {
         <ContentComment>
           <p>{data.content}</p>
         </ContentComment>
-        <AdminComment>
-          <button className='material-icons'>delete</button>
-          <button className='material-icons'>edit</button>
-        </AdminComment>
+        {
+          parseInt(userId, 10) === data.userId &&
+          (
+            <AdminComment>
+              <button
+                className='material-icons'
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleDelete()
+                }}
+              >delete</button>
+              <button className='material-icons'>edit</button>
+            </AdminComment>
+          )
+        }
+
       </Comment>
     </Container>
   );

@@ -61,6 +61,7 @@ export default function PostDetail() {
               state={{
                 id,
                 userId,
+
               }}
             >
               Nouveau Commentaire

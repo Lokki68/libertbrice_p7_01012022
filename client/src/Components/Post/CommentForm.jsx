@@ -19,11 +19,10 @@ export default function CommentForm() {
 
     createComment(id, data).then((res) => {
       if (res.status === 200) {
-        navigate(`/`);
+        navigate(`/post/${id}`);
       }
     });
 
-    console.log(data);
   };
 
   return (
