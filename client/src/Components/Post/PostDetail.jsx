@@ -16,6 +16,7 @@ export default function PostDetail() {
   const users = useSelector((state) => state.users.data);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [like, setLike] = useState(false);
   const params = useParams();
   const userId = localStorage.getItem('groupomania-id');
   const id = params.id;
@@ -51,11 +52,16 @@ export default function PostDetail() {
                 <button onClick={handleDelete}>supprimer</button>
               </div>
             ) : (
-              ''
+              !like ?
+                <button className="btn-like material-icons">favorite_border</button> :
+                <button className="btn-like material-icons">favorite</button>
+
             )}
           </CardHeader>
           <CardBody>
             {data.image && <img src={data.image} alt='content' />}
+
+
             <Link
               to={`/post/${id}/commentform`}
               state={{
@@ -109,6 +115,14 @@ const CardHeader = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  
+  .btn-like{
+    background-color: transparent;
+    padding: 5px 5px;
+    margin-left: 20px;
+    
+    color: ${colors.tertiary};
+  }
 
   .btn-back,
   .admin-section {

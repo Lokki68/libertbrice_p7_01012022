@@ -5,7 +5,6 @@ import { colors } from '../../Utils/styles/color';
 import { dateParser } from '../../Utils/utils';
 
 export default function PostCard({ post, users }) {
-  console.log(post);
 
   const posterUserName = users.find((user) => user.id === post.userId).username;
   const date = dateParser(post.date);

@@ -8,6 +8,7 @@ const userRoutes = require('./Routes/users.routes');
 const authRoutes = require('./Routes/auth.routes');
 const postRoutes = require('./Routes/posts.routes');
 const commentRoutes = require('./Routes/comment.routes');
+const likeRoutes = require('./Routes/like.routes');
 const adminRoutes = require('./Routes/admin.routes');
 
 const app = express();
@@ -36,6 +37,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
+app.use('/api/like', likeRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Exports -> app

@@ -12,7 +12,7 @@ exports.getById = (req, res) => {
       const msg = `Comment Found`;
       res.status(200).json({ msg, data: comment });
     })
-    .catch((err) => res.status(400).json({ err: err.message }));
+    .catch((err) => res.json({status: 400, err: err.message }));
 };
 
 exports.createComment = (req, res) => {
@@ -30,7 +30,7 @@ exports.createComment = (req, res) => {
       const msg = `CommentCreated`;
       res.json({ status: 200, msg, data });
     })
-    .catch((err) => res.status(400).json({ err: err.message }));
+    .catch((err) => res.json({status: 400, err: err.message }));
 };
 
 exports.updateComment = (req, res) => {
@@ -49,15 +49,15 @@ exports.updateComment = (req, res) => {
           .save()
           .then(() => {
             const msg = `Comment Updated`;
-            res.status(200).json({ msg, data: comment });
+            res.json({status: 200, msg, data: comment });
           })
-          .catch((err) => res.status(500).json({ err: err.message }));
+          .catch((err) => res.json({status: 500, err: err.message }));
       } else {
         const msg = 'Bad request';
-        res.status(400).json({ err: msg });
+        res.json({status: 400, err: msg });
       }
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };
 
 exports.deleteComment = (req, res) => {
@@ -72,12 +72,12 @@ exports.deleteComment = (req, res) => {
           .then((ressource) => {
             if (ressource === 0) {
               const msg = 'Comment Not Found';
-              res.status(404).json({ msg });
+              res.json({status: 404, msg });
             }
             res.json({status: 200, msg: 'Comment deleted' });
           })
-          .catch((err) => res.status(500).json({ err: err.message }));
+          .catch((err) => res.json({status: 500, err: err.message }));
 
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };

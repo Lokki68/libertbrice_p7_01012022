@@ -49,7 +49,7 @@ exports.getById = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-exports.getByUserId = (req, res, next) => {
+exports.getByUserId = (req, res) => {
   const id = req.params.id;
 
   User.findByPk(id, {

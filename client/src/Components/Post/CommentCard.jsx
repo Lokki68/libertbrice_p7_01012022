@@ -21,7 +21,6 @@ export default function CommentCard({ data, users }) {
   }, []);
 
   const handleDelete = () => {
-    const {postId} = data;
     const id  = data.id;
     deleteComment(id).then(res => {
       if(res.status === 200){
