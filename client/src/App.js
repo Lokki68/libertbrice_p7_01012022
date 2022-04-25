@@ -59,7 +59,7 @@ export default function App() {
             path='/post/:id/editForm'
             element={
               <RequireAuth withAuth={true}>
-                <PostEditForm />
+                <PostForm />
               </RequireAuth>
             }
           />

@@ -26,7 +26,7 @@ exports.getAllPost = (req, res, next) => {
     ],
   })
     .then((posts) => res.status(200).json(posts))
-    .catch((err) => res.status(400).json({ err: err.message }));
+    .catch((err) => res.json({status: 400, err: err.message }));
 };
 
 exports.getById = (req, res, next) => {
@@ -43,10 +43,10 @@ exports.getById = (req, res, next) => {
         as: 'likes',
       },
     ],
-    order: [['comments', 'date', 'ASC']],
+    order: [['comments', 'date', 'DESC']],
   })
     .then((post) => res.status(200).json(post))
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };
 
 exports.getByUserId = (req, res) => {
@@ -72,7 +72,7 @@ exports.getByUserId = (req, res) => {
     order: [['posts', 'date', 'DESC']],
   })
     .then((post) => res.status(200).json(post))
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };
 
 exports.createPost = (req, res, next) => {
@@ -95,31 +95,29 @@ exports.createPost = (req, res, next) => {
       const msg = `Post Created`;
       res.json({ status: 200, msg, data });
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };
 
 exports.updatePost = (req, res, next) => {
-  const token = req.body.header.split(' ')[1];
-  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-  const userId = decodedToken.userId;
 
-  const { body } = req;
+  const { userId, message } = req.body;
   const id = req.params.id;
 
   Post.findByPk(id)
     .then((post) => {
       if (post.userId === userId) {
-        if (!post) return res.status(404).json({ msg: 'No post found' });
-        post.message = body.message;
+        if (!post) return res.json({status: 404, msg: 'No post found' });
+        post.message = message;
+
         post
           .save()
-          .then(() => res.status(200).json({ msg: 'post updated', data: post }))
-          .catch((err) => res.status(500).json({ err: err.message }));
+          .then(() => res.json({status: 200, msg: 'post updated', data: post }))
+          .catch((err) => res.json({status: 500, err: err.message }));
       } else {
         res.status(404).json({ msg: 'invalid request' });
       }
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };
 
 exports.deletePost = (req, res) => {
@@ -132,10 +130,10 @@ exports.deletePost = (req, res) => {
       })
         .then((postDelete) => {
           if (postDelete == 0)
-            return res.status(404).json({ msg: 'Not Found' });
-          res.status(200).json({ msg: 'Post deleted' });
+            return res.json({status: 404, msg: 'Not Found' });
+          res.json({status: 200, msg: 'Post deleted' });
         })
-        .catch((err) => res.status(500).json({ err: err.message }));
+        .catch((err) => res.json({status: 500, err: err.message }));
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };

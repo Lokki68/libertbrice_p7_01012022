@@ -42,7 +42,6 @@ export default function PostDetail() {
             <NavLink to={'/'} className='btn-back'>
               Retour
             </NavLink>
-            <h1>{data.message}</h1>
 
             {data.userId.toString() === userId ? (<div className='admin-section'>
                 <Link
@@ -58,6 +57,8 @@ export default function PostDetail() {
             )}
           </CardHeader>
           <CardBody>
+            <h1>{data.message}</h1>
+
             {data.image && <img src={data.image} alt='content'/>}
 
 
@@ -104,24 +105,25 @@ const Content = styled.div`
 
 const CardHeader = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
 
   .btn-like {
     background-color: transparent;
     padding: 5px 5px;
-    margin-left: 20px;
-
+    margin: 0 20px;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
     color: ${colors.tertiary};
+  
+    &:hover {
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    
   }
 
-  .btn-back,
-  .admin-section {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  
 
   .btn-back {
     left: 0;

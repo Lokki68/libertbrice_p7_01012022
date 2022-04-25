@@ -25,6 +25,13 @@ export const createPost = (data) => {
     .catch((err) => console.log({ err: err.message }));
 };
 
+export const updatePost = (data, id) => {
+  return axios
+    .put(`http://localhost:8080/api/post/${id}`, data)
+    .then( res => res.data)
+    .catch(err => console.log({err: err.message}))
+}
+
 export const deletePost = (id) => {
   return axios
     .delete(`http://localhost:8080/api/post/${id}`)

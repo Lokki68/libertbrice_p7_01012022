@@ -1,30 +1,49 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
-import { createPost } from '../../Api/posts';
-import { colors } from '../../Utils/styles/color';
+import {createPost, updatePost} from '../../Api/posts';
+import {colors} from '../../Utils/styles/color';
 
 export default function PostForm() {
+  const location = useLocation();
+  console.log(location)
   const navigate = useNavigate();
 
+  const [locationData, setLocationData] = useState();
+  const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
 
+  useEffect(() => {
+    if (location.state !== null) {
+      setLocationData(location.state.data)
+      setMessage(location.state.data.message)
+      setEdit(true);
+    }
+
+  }, [])
+
   const handleSubmit = () => {
     const userId = localStorage.getItem('groupomania-id');
+
     const data = {
-      userId,
+      userId: +userId,
       message,
       image,
     };
 
-    createPost(data).then((res) => {
-      if (res.status === 200) {
-        navigate('/');
-      }
-    });
+    if (!edit) {
+      createPost(data).then((res) => {
+        if (res.status === 200) {
+          navigate('/');
+        }
+      });
+    } else {
+      const id = locationData.id
+      updatePost(data, id).then(res => console.log(res))
+      navigate('/');
+    }
 
-    console.log(data);
   };
 
   return (
@@ -42,6 +61,7 @@ export default function PostForm() {
               id='message'
               cols='30'
               rows='10'
+              value={message}
               placeholder='Nouveau message ...'
               onInput={(e) => setMessage(e.target.value)}
             ></textarea>
