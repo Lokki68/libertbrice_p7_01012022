@@ -7,6 +7,13 @@ export const createComment = (postId, data) => {
     .catch((err) => console.log({ err: err.message }));
 };
 
+export const updateComment = (id, data) => {
+  return axios
+    .put(`http://localhost:8080/api/comment/${id}`, data)
+    .then((res) => res.data)
+    .catch((err) => console.log({ err: err.message }));
+}
+
 export const deleteComment = (id) => {
   return axios
     .delete(`http://localhost:8080/api/comment/${id}`)

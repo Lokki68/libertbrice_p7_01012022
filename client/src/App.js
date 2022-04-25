@@ -15,7 +15,6 @@ import PostForm from './Components/Post/PostForm';
 import PostDetail from './Components/Post/PostDetail';
 import CommentForm from './Components/Post/CommentForm';
 import DeleteComment from "./Components/Post/DeleteComment";
-import PostEditForm from "./Components/Post/PostEditForm";
 
 export default function App() {
   return (

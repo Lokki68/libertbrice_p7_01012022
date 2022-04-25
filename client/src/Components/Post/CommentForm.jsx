@@ -1,27 +1,47 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { createComment } from '../../Api/comment';
+import {createComment, updateComment} from '../../Api/comment';
 import { colors } from '../../Utils/styles/color';
 
 export default function CommentForm() {
   const location = useLocation();
-  const { id, userId } = location.state;
+  const { id, userId, postId, oldContent } = location.state;
   const navigate = useNavigate();
-
+  const [edit, setEdit] = useState('');
   const [content, setContent] = useState('');
+
+
+  useEffect(() => {
+    if (location.state.edit){
+      setEdit(true);
+      setContent(oldContent)
+    }
+  }, [])
+
 
   const handleSubmit = () => {
     const data = {
-      userId,
+      userId: +userId,
       content,
     };
 
-    createComment(id, data).then((res) => {
-      if (res.status === 200) {
-        navigate(`/post/${id}`);
-      }
-    });
+    if(!edit) {
+
+
+      createComment(id, data).then((res) => {
+        if (res.status === 200) {
+          navigate(`/post/${id}`);
+        }
+      });
+    } else {
+      updateComment(id, data).then(res => {
+        if (res.status === 200){
+          navigate(`/post/${postId}`)
+        }
+        console.log(res)
+      })
+    }
 
   };
 
@@ -40,6 +60,7 @@ export default function CommentForm() {
               id='content'
               cols='30'
               rows='10'
+              value={content}
               placeholder='Nouveau commentaire ...'
               onInput={(e) => setContent(e.target.value)}
             ></textarea>
@@ -66,7 +87,7 @@ export default function CommentForm() {
 const Container = styled.div`
   padding-top: 10px;
   height: calc(100vh - 90px);
-  background: url('../../asset/photo_entreprise.jpg') no-repeat center/cover;
+  background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
 `;
 
 const Formulaire = styled.form`
@@ -78,6 +99,10 @@ const Formulaire = styled.form`
   background: url('../../asset/logo_planete.jpg') no-repeat center/cover;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
   border-radius: 5px;
+  
+  textarea {
+    width: 80%;
+  }
 
   .envoyer,
   .close {

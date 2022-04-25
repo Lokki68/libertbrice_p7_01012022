@@ -6,7 +6,6 @@ import {colors} from '../../Utils/styles/color';
 
 export default function PostForm() {
   const location = useLocation();
-  console.log(location)
   const navigate = useNavigate();
 
   const [locationData, setLocationData] = useState();

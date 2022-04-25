@@ -34,17 +34,15 @@ exports.createComment = (req, res) => {
 };
 
 exports.updateComment = (req, res) => {
-  const token = req.body.header.split(' ')[1];
-  const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-  const userId = decodedToken.userId;
 
   const id = req.params.id;
-  const { body } = req;
+  const { userId, content } = req.body;
 
   Comment.findByPk(id)
     .then((comment) => {
       if (comment.userId === userId) {
-        comment.content = body.content;
+        comment.content = content;
+
         comment
           .save()
           .then(() => {

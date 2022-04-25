@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 import { dateParser } from '../../Utils/utils';
-import { useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function CommentCard({ data, users }) {
   const navigate = useNavigate();
+  const id = data.id;
   const userId = localStorage.getItem('groupomania-id');
   const [posterUserName, setPosterUserName] = useState('');
 
@@ -37,9 +38,19 @@ export default function CommentCard({ data, users }) {
             <AdminComment>
               <button
                 className='material-icons'
-                onClick={ () => navigate(`/post/delete/${data.id}`)}
+                onClick={ () => navigate(`/post/delete/${id}`)}
               >delete</button>
-              <button className='material-icons'>edit</button>
+              <Link
+                to={`/post/${data.postId}/commentForm`}
+                state={{
+                  id,
+                  postId: data.postId,
+                  userId,
+                  oldContent: data.content,
+                  edit: true
+                }}
+                className='material-icons'
+              >edit</Link>
             </AdminComment>
           )
         }
@@ -83,25 +94,27 @@ const AdminComment = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-
-  button {
+  
+  button, a{
     padding: 5px;
     color: #fff;
     margin: 0 5px;
-    border: none;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-
-    &:first-child {
-      background-color: ${colors.alert};
-    }
-
-    &:last-child {
-      background-color: ${colors.secondary};
-    }
-
     &:hover {
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
     }
   }
+
+  button {
+    border: none;
+    background-color: ${colors.alert};
+  }
+  
+  a{
+    background-color: ${colors.secondary};
+
+  }
+  
+  
 `;
