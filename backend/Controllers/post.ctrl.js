@@ -122,7 +122,7 @@ exports.updatePost = (req, res, next) => {
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
-exports.deletePost = (req, res, next) => {
+exports.deletePost = (req, res) => {
   const id = req.params.id;
 
   Post.findByPk(id)

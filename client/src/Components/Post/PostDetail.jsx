@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {Link, NavLink, useNavigate, useParams} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
-import { getPostReducer } from '../../Redux/Posts/postReducers';
-import { deletePost, getOnePost } from '../../Api/posts';
-import { colors } from '../../Utils/styles/color';
+import {getPostReducer} from '../../Redux/Posts/postReducers';
+import {deletePost, getOnePost} from '../../Api/posts';
+import {colors} from '../../Utils/styles/color';
 
 import PostDetailSquelette from './PostDetailSquelette';
 import CommentCard from './CommentCard';
@@ -12,7 +12,7 @@ import CommentCard from './CommentCard';
 export default function PostDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.post);
+  const {data} = useSelector((state) => state.post);
   const users = useSelector((state) => state.users.data);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,65 +29,57 @@ export default function PostDetail() {
   }, []);
 
   const handleDelete = () => {
-    deletePost(id).then((_) => {
-      navigate('/');
+    deletePost(id).then((res) => {
+      if(res.status === 200){
+        navigate('/');
+      }
     });
   };
 
-  return (
-    <Container>
-      {!isLoaded ? (
-        <PostDetailSquelette />
-      ) : (
-        <Content>
+  return (<Container>
+      {!isLoaded ? (<PostDetailSquelette/>) : (<Content>
           <CardHeader>
             <NavLink to={'/'} className='btn-back'>
               Retour
             </NavLink>
             <h1>{data.message}</h1>
 
-            {data.userId.toString() === userId ? (
-              <div className='admin-section'>
-                <button>Modifier</button>
+            {data.userId.toString() === userId ? (<div className='admin-section'>
+                <Link
+                  to={`/post/${id}/editform `}
+                  state={{
+                    data,
+                  }}
+                >Modifier</Link>
                 <button onClick={handleDelete}>supprimer</button>
-              </div>
-            ) : (
-              !like ?
-                <button className="btn-like material-icons">favorite_border</button> :
+              </div>) : (!like ? <button className="btn-like material-icons">favorite_border</button> :
                 <button className="btn-like material-icons">favorite</button>
 
             )}
           </CardHeader>
           <CardBody>
-            {data.image && <img src={data.image} alt='content' />}
+            {data.image && <img src={data.image} alt='content'/>}
 
 
             <Link
               to={`/post/${id}/commentform`}
               state={{
-                id,
-                userId,
+                id, userId,
 
               }}
             >
               Nouveau Commentaire
             </Link>
           </CardBody>
-          {data.comments.length > 0 && (
-            <CardComment>
+          {data.comments.length > 0 && (<CardComment>
               <ul>
-                {data.comments.map((comment) => (
-                  <li key={comment.id}>
-                    <CommentCard data={comment} users={users} />
-                  </li>
-                ))}
+                {data.comments.map((comment) => (<li key={comment.id}>
+                    <CommentCard data={comment} users={users}/>
+                  </li>))}
               </ul>
-            </CardComment>
-          )}
-        </Content>
-      )}
-    </Container>
-  );
+            </CardComment>)}
+        </Content>)}
+    </Container>);
 }
 
 // ----- Styled
@@ -115,12 +107,12 @@ const CardHeader = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  
-  .btn-like{
+
+  .btn-like {
     background-color: transparent;
     padding: 5px 5px;
     margin-left: 20px;
-    
+
     color: ${colors.tertiary};
   }
 
@@ -163,6 +155,22 @@ const CardHeader = styled.div`
         background-color: ${colors.alert};
       }
 
+      &:hover {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    a {
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      background-color: ${colors.success};
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+      
       &:hover {
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
       }
