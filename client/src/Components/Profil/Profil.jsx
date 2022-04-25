@@ -63,7 +63,7 @@ const Card = styled.div`
   width: 80%;
   height: 70%;
   margin: auto;
-  background-color: url('../../img/logo_planete.jpg') no-repeat center/cover;
+  background-color: url('../../asset/logo_planete.jpg') no-repeat center/cover;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
   border-radius: 10px;
   display: flex;
@@ -87,7 +87,7 @@ const Card = styled.div`
 
     &:hover {
       box-shadow: 2px 2px 2px ${colors.primary},
-        inset 2px 2px 2px ${colors.black};
+      inset 2px 2px 2px ${colors.black};
       color: ${colors.black};
     }
   }

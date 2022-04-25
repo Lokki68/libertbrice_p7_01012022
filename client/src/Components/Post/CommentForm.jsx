@@ -66,7 +66,7 @@ export default function CommentForm() {
 const Container = styled.div`
   padding-top: 10px;
   height: calc(100vh - 90px);
-  background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
+  background: url('../../asset/photo_entreprise.jpg') no-repeat center/cover;
 `;
 
 const Formulaire = styled.form`
@@ -75,7 +75,7 @@ const Formulaire = styled.form`
   height: 50%;
   margin: 50px auto;
   padding: 20px;
-  background: url('../../img/logo_planete.jpg') no-repeat center/cover;
+  background: url('../../asset/logo_planete.jpg') no-repeat center/cover;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
   border-radius: 5px;
 
@@ -90,7 +90,7 @@ const Formulaire = styled.form`
 
     &:hover {
       box-shadow: 2px 2px 2px ${colors.primary},
-        inset 2px 2px 2px ${colors.black};
+      inset 2px 2px 2px ${colors.black};
       color: ${colors.black};
     }
   }

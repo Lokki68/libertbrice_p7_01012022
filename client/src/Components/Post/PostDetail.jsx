@@ -96,7 +96,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
+  background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
 `;
 
 const Content = styled.div`

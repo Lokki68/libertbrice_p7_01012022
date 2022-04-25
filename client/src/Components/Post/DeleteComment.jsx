@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {colors} from "../../Utils/styles/color";
 import {useNavigate, useParams} from "react-router-dom";
+import {deleteComment} from "../../Api/comment";
 
 
 export default  function DeleteComment(){
@@ -10,17 +11,33 @@ export default  function DeleteComment(){
   const navigate = useNavigate();
 
 
+  const handleDelete = () => {
+    deleteComment(id)
+      .then(res => {
+        if(res.status === 200){
+          navigate(-1);
+        }
+      })
+
+  }
+
+
 
 
   return(
     <Container>
       <DeleteWrapper>
+
+
         <h2>Voulez-vous effacer ce commentaire ?</h2>
 
         <div className='btn-wrapper'>
           <button
             className='done material-icons'
-
+            onClick={e => {
+              e.preventDefault()
+              handleDelete()
+            }}
           >done</button>
           <button
             className='close material-icons'
@@ -50,12 +67,14 @@ const DeleteWrapper = styled.div `
   flex-direction: column;
   width: 30%;
   height: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  background-color: rgba(255,255,255,.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .8);
   
   h2{
     text-align: center;
     font-size: 2rem;
-    color: ${colors.tertiary};
+    color: ${colors.black};
   }
   
   .btn-wrapper{
