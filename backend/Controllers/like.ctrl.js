@@ -14,8 +14,7 @@ exports.getLikeByPostId = (req, res) => {
 }
 
 exports.createLike = (req, res) => {
-  const postId = req.params.postId;
-  const {userId} = req.body;
+  const {postId, userId} = req.body;
 
   const like = {
     postId,
@@ -40,7 +39,7 @@ exports.deleteLike = (req, res) => {
           where: {id},
         })
           .then(ressource => {
-            if(ressource === 0){
+            if(ressource === null){
               const msg = 'Like not Found'
               res.json({status: 400, msg})
             }

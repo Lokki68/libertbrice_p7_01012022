@@ -8,6 +8,7 @@ import {colors} from '../../Utils/styles/color';
 
 import PostDetailSquelette from './PostDetailSquelette';
 import CommentCard from './CommentCard';
+import Like from "../Like/Like";
 
 export default function PostDetail() {
   const navigate = useNavigate();
@@ -16,10 +17,11 @@ export default function PostDetail() {
   const users = useSelector((state) => state.users.data);
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [like, setLike] = useState(false);
   const params = useParams();
   const userId = localStorage.getItem('groupomania-id');
   const id = params.id;
+
+  console.log(data)
 
   useEffect(() => {
     getOnePost(id).then((res) => {
@@ -51,8 +53,7 @@ export default function PostDetail() {
                   }}
                 >Modifier</Link>
                 <button onClick={handleDelete}>supprimer</button>
-              </div>) : (!like ? <button className="btn-like material-icons">favorite_border</button> :
-                <button className="btn-like material-icons">favorite</button>
+              </div>) : (<Like likes={data.likes} postId={id}/>
 
             )}
           </CardHeader>
