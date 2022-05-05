@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
+import {useSelector} from "react-redux";
+import AdminSection from "../Admin/AdminSection";
 
 export default function CardAnnuaire({ user }) {
+  const {infos} = useSelector(state => state.user)
   const [toggle, setToggle] = useState(false);
 
+  console.log(infos)
   const toggleModal = () => {
     setToggle(!toggle);
   };
@@ -36,6 +40,12 @@ export default function CardAnnuaire({ user }) {
             <button className='material-icons btn-close' onClick={toggleModal}>
               close
             </button>
+            {
+              infos.admin && (
+                <AdminSection user={user} />
+              )
+            }
+
           </CardModal>
         </OverlayModal>
       ) : (
@@ -138,6 +148,8 @@ const InfoModal = styled.div`
   width: 70%;
   height: inherit;
 `;
+
+
 
 // ----- Styled Card
 
