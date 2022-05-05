@@ -1,16 +1,16 @@
 import axios from "axios";
 
 
-export const createLike = (data) => {
+export const createLike = (dataLike) => {
   return axios
-    .post(`http://localhost:8080/api/like`, data)
+    .post(`http://localhost:8080/api/like`, dataLike)
     .then(res => res.data)
     .catch(err => console.log({err: err.message}))
 }
 
-export const deleteLike = (data) => {
+export const deleteLike = (id) => {
   return axios
-    .delete(`http://localhost:8080/api/like`, data)
+    .delete(`http://localhost:8080/api/like/${id}`, )
     .then(res => res.data)
     .catch(err => console.log({err: err.message}))
 }

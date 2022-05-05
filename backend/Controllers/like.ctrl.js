@@ -16,6 +16,8 @@ exports.getLikeByPostId = (req, res) => {
 exports.createLike = (req, res) => {
   const {postId, userId} = req.body;
 
+  console.log('req',req.body)
+
   const like = {
     postId,
     userId
@@ -30,25 +32,18 @@ exports.createLike = (req, res) => {
 };
 
 exports.deleteLike = (req, res) => {
-  const {id, userId} = req.body;
+
+  const {id} = req.params
+
+  console.log('req', req.params)
 
   Like.findByPk(id)
-    .then(like => {
-      if(like.userId === userId){
-        Like.destroy({
-          where: {id},
-        })
-          .then(ressource => {
-            if(ressource === null){
-              const msg = 'Like not Found'
-              res.json({status: 400, msg})
-            }
-              res.json({status: 200, msg: 'Like deleted'})
-          })
-          .catch(err => res.json({status: 500, err: err.message}))
-      } else {
-        res.json({status: 404, msg: 'UserId not good'})
-      }
+    .then(() => {
+      Like.destroy({
+        where: {id},
+      })
+        .then(() => res.json({status: 200, msg:'like deleted'}))
+        .catch(err => res.json({status: 404, msg: err.message}))
     })
-    .catch(err => res.status(500).json({err: err.message}))
+    .catch(err => res.json({status: 500, msg: err.message}))
 }

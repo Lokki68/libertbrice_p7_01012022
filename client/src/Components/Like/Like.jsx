@@ -5,12 +5,12 @@ export default function Like({likes, postId}) {
 
   const [isLiked, setIsLiked] = useState(false);
   const [userLikeId, setUserLikeId] = useState('');
-  const userId = parseInt(localStorage.getItem('groupomania-id'))
+  const user_id = localStorage.getItem('groupomania-id')
 
   useEffect(() => {
 
     if (likes !== null || likes.length >= 1 ){
-      const result = likes.filter(like => like.userId === userId)
+      const result = likes.filter(like => like.userId === +user_id)
 
       console.log(result)
       if(result.length >=1){
@@ -22,20 +22,21 @@ export default function Like({likes, postId}) {
     }
   }, [])
 
+  console.log(userLikeId)
+
   const handleLike = () => {
     const dataLike = {
       postId: parseInt(postId),
-      userId
+      userId: +user_id
     }
 
-    const dataDislike = {
-      id: userLikeId,
-      userId
-    }
+    const id = userLikeId;
+
+
 
 
     console.log('Like', dataLike)
-    console.log('DisLike', dataDislike)
+    console.log('DisLike', id)
 
     if (!isLiked) {
       createLike(dataLike)
@@ -45,7 +46,7 @@ export default function Like({likes, postId}) {
           }
         }).catch(err => console.log({err: err.message}))
     } else {
-      deleteLike(dataDislike)
+      deleteLike(id)
         .then(res => {
           if (res.status === 200){
             setIsLiked(false)
