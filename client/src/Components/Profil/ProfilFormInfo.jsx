@@ -2,25 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { /*updatePictureUser, */ updateUser } from '../../Api/user';
+import { updateUser} from '../../Api/user';
 import { loadUserInfosReducer } from '../../Redux/User/userReducer';
 import { colors } from '../../Utils/styles/color';
 import { isEmpty } from '../../Utils/utils';
 import ProfilFormSquelette from './ProfilFormSquelette';
 
-export default function ProfilForm() {
+export default function ProfilFormInfo() {
   const { infos } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [image, setImage] = useState();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
 
   useEffect(() => {
     if (infos !== null) {
-      setImage(infos.image);
       setUsername(infos.username);
       setEmail(infos.email);
       setPhoneNumber(infos.phoneNumber);
@@ -40,13 +38,10 @@ export default function ProfilForm() {
       dispatch(loadUserInfosReducer(res.data));
     });
 
-    console.log(image);
 
-    /* updatePictureUser(id, image).then((res) => {
-      console.log(res);
-    }); */
 
-    navigate('/profil');
+
+    navigate(-1);
   };
 
   return (
@@ -58,17 +53,6 @@ export default function ProfilForm() {
             handleSubmit();
           }}
         >
-          <div className='info profil-picture'>
-            <img src={infos.image} alt='profil' />
-            <label htmlFor='image'>Photo de profil</label>
-            <input
-              type='file'
-              id='image'
-              accept='.jpg, .jpeg, .png'
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-          </div>
-
           <div className='info'>
             <input
               type='text'
@@ -138,6 +122,10 @@ const Formulaire = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
+  .info{
+    margin: 30px 0;
+  }
 
   .info input {
     outline: none;
@@ -149,35 +137,7 @@ const Formulaire = styled.form`
     font-size: 1.6rem;
   }
 
-  .profil-picture {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      width: 160px;
-      height: 160px;
-      border-radius: 4px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    label {
-      margin: 15px;
-      padding: 8px;
-      background-color: ${colors.primary};
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${colors.secondary};
-      }
-    }
-
-    input[type='file'] {
-      display: none;
-    }
-  }
+  
 
   .info.password input {
     margin-top: 15px;

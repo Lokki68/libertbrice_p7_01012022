@@ -10,13 +10,14 @@ import RequireAuth from './Utils/RequireAuth';
 import Home from './Components/Home';
 import Annuaire from './Components/Annuaire/Annuaire';
 import Profil from './Components/Profil/Profil';
-import ProfilForm from './Components/Profil/ProfilForm';
+import ProfilFormInfo from './Components/Profil/ProfilFormInfo';
 import PostForm from './Components/Post/PostForm';
 import PostDetail from './Components/Post/PostDetail';
 import CommentForm from './Components/Post/CommentForm';
 import DeleteComment from "./Components/Post/DeleteComment";
 import AdminProfilForm from "./Components/Admin/AdminProfilForm";
 import Admin from "./Components/Admin/Admin";
+import ProfilFormPhoto from "./Components/Profil/ProfilFormPhoto";
 
 export default function App() {
   return (
@@ -90,10 +91,19 @@ export default function App() {
             }
           />
           <Route
-            path='/profilform'
+            path='/profilforminfo'
             element={
               <RequireAuth withAuth={true}>
-                <ProfilForm />
+                <ProfilFormInfo />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path='/profilformphoto'
+            element={
+              <RequireAuth withAuth={true}>
+                <ProfilFormPhoto />
               </RequireAuth>
             }
           />

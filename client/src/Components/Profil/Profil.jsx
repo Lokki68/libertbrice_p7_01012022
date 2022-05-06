@@ -37,8 +37,11 @@ export default function Profil() {
             <p>{infos.email}</p>
             <p>{infos.phoneNumber}</p>
           </InfoCard>
+          <ButtonContainer>
+            <NavLink to='/profilformphoto'>Modifier Photo</NavLink>
+            <NavLink to='/profilforminfo'>Modifier info</NavLink>
+          </ButtonContainer>
 
-          <NavLink to='/profilform'>Modifier</NavLink>
         </Card>
       ) : (
         <ProfilSquelette />
@@ -69,28 +72,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: row;
 
-  a {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    width: 30%;
-    height: 40px;
-    color: #fff;
-    font-size: 20px;
-    background-color: ${colors.tertiary};
-    cursor: pointer;
-    box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.primary};
-
-    &:hover {
-      box-shadow: 2px 2px 2px ${colors.primary},
-      inset 2px 2px 2px ${colors.black};
-      color: ${colors.black};
-    }
-  }
+  
 `;
 
 const Picture = styled.div`
@@ -136,3 +118,35 @@ const InfoCard = styled.div`
     font-size: 3rem;
   }
 `;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px;
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    font-size: 20px;
+    background-color: ${colors.tertiary};
+    cursor: pointer;
+    box-shadow: 2px 2px 2px ${colors.black}, inset 2px 2px 2px ${colors.primary};
+
+    &:hover {
+      box-shadow: 2px 2px 2px ${colors.primary},
+      inset 2px 2px 2px ${colors.black};
+      color: ${colors.black};
+    }
+  }
+`;
+
