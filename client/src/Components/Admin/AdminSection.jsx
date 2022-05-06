@@ -1,18 +1,52 @@
 import React from 'react';
 import styled from "styled-components";
 import {colors} from "../../Utils/styles/color";
+import {deleteAdmin, saveAdmin} from "../../Api/admin";
+import {Link} from "react-router-dom";
 
-export default function AdminSection(props) {
+export default function AdminSection({user, toggleFunc}) {
+  console.log(user)
+
+  const handleDelete = () => {
+    const id = user.admin;
+
+    deleteAdmin(id)
+      .then(res => {
+        if(res.status === 200){
+          toggleFunc()
+        }
+      })
+  }
+
+  const handleSave = () => {
+    const id = user.id;
+    const data = {
+      username: user.username
+    }
+
+    saveAdmin(id, data)
+      .then(res => {
+        if(res.status === 200){
+          toggleFunc()
+        }
+      })
+  }
   return (
     <AdminBarre>
       <button
       className='material-icons btn btn-upgrade'
+      onClick={() => handleSave()}
       >upgrade</button>
-      <button
+      <Link
+      to='/admin/profilForm'
+      state={{
+        user: user,
+      }}
       className='material-icons btn btn-modif'
-      >edit</button>
+      >edit</Link>
       <button
       className='material-icons btn btn-delete'
+      onClick={() => handleDelete()}
       >delete</button>
     </AdminBarre>
   );

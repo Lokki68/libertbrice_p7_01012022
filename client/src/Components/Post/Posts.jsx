@@ -34,7 +34,7 @@ export default function Posts() {
             })}
           </Content>
         ) : (
-          <h1>Nok</h1>
+          <h1>Pas de post pour le moment ...</h1>
         )}
       </Container>
     </Fragment>
@@ -48,9 +48,8 @@ const Container = styled.div`
   height: 85%;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-
-  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  aspect-ratio: 16/9;
   padding: 30px 0;
 
   overflow-y: scroll;

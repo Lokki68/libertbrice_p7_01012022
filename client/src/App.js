@@ -15,6 +15,8 @@ import PostForm from './Components/Post/PostForm';
 import PostDetail from './Components/Post/PostDetail';
 import CommentForm from './Components/Post/CommentForm';
 import DeleteComment from "./Components/Post/DeleteComment";
+import AdminProfilForm from "./Components/Admin/AdminProfilForm";
+import Admin from "./Components/Admin/Admin";
 
 export default function App() {
   return (
@@ -95,6 +97,24 @@ export default function App() {
               </RequireAuth>
             }
           />
+
+          <Route
+            path='/admin'
+            element={
+              <RequireAuth withAuth={true}>
+                <Admin />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/admin/profilForm'
+            element={
+              <RequireAuth withAuth={true}>
+                <AdminProfilForm />
+              </RequireAuth>
+            }
+          />
+
           <Route
             path='/signup'
             element={

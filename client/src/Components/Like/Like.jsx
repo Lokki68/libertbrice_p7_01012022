@@ -26,7 +26,7 @@ export default function Like({likes, postId}) {
 
   const handleLike = () => {
     const dataLike = {
-      postId: parseInt(postId),
+      postId: parseInt(postId, 10),
       userId: +user_id
     }
 

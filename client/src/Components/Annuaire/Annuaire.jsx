@@ -16,10 +16,14 @@ export default function Annuaire() {
   const [search, setSearch] = useState('');
   const [dataFiltered, setDataFiltered] = useState([]);
 
-  useEffect(() => {
+  const getAllUserFunction = () => {
     getAllUsers().then((res) => {
       dispatch(getUsersReducer(res.data));
-    });
+    })
+  }
+
+  useEffect(() => {
+    getAllUserFunction()
   }, []);
 
   const searchUser = (name) => {
@@ -54,11 +58,11 @@ export default function Annuaire() {
         ) : search.length >= 1 ? (
           !isEmpty(dataFiltered) &&
           dataFiltered.map((user) => {
-            return user && <CardAnnuaire user={user} key={user.id} />;
+            return user && <CardAnnuaire user={user} key={user.id} getFunc={getAllUserFunction} />;
           })
         ) : (
           data.map((user) => {
-            return user && <CardAnnuaire user={user} key={user.id} />;
+            return user && <CardAnnuaire user={user} key={user.id} getFunc={getAllUserFunction} />;
           })
         )}
       </Content>

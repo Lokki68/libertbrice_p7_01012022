@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
@@ -10,7 +10,7 @@ import { logoutUserReducer } from '../../Redux/User/userReducer';
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLogged } = useSelector((state) => state.user);
+  const { isLogged, infos } = useSelector((state) => state.user);
 
   const onLogout = () => {
     localStorage.removeItem('groupomania-token');
@@ -50,6 +50,18 @@ export default function Header() {
           </NavLink>
         </NavConnectContainer>
       )}
+      {
+        isLogged && (
+          <IdContainer>
+            <Link
+              to='/admin'
+            >{infos.username}</Link>
+            {infos.admin &&
+              <span className="material-icons">star</span>
+            }
+          </IdContainer>
+        )
+      }
     </Container>
   );
 }
@@ -132,4 +144,16 @@ const NavConnectContainer = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const IdContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  a{
+    font-size: 2em;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+  }
 `;

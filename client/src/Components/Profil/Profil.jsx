@@ -94,6 +94,7 @@ const Card = styled.div`
 `;
 
 const Picture = styled.div`
+  position: relative;
   width: 30%;
   height: 100%;
   display: flex;
@@ -106,6 +107,15 @@ const Picture = styled.div`
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  span{
+    position: absolute;
+    top: 0;
+    margin-top: 45px;
+    color: ${colors.tertiary};
+    font-size: 35px;
+      
   }
 `;
 

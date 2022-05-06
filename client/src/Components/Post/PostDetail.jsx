@@ -17,11 +17,9 @@ export default function PostDetail() {
   const users = useSelector((state) => state.users.data);
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const params = useParams();
+  const {id} = useParams();
   const userId = localStorage.getItem('groupomania-id');
-  const id = params.id;
 
-  console.log(data)
 
   useEffect(() => {
     getOnePost(id).then((res) => {
@@ -45,17 +43,22 @@ export default function PostDetail() {
               Retour
             </NavLink>
 
-            {data.userId.toString() === userId ? (<div className='admin-section'>
+            {data.userId.toString() === userId ? (
+              <div className='admin-section'>
                 <Link
                   to={`/post/${id}/editform `}
                   state={{
                     data,
                   }}
-                >Modifier</Link>
-                <button onClick={handleDelete}>supprimer</button>
-              </div>) : (<Like likes={data.likes} postId={id}/>
-
-            )}
+                  className='material-icons'
+                >edit</Link>
+                <button
+                  onClick={handleDelete}
+                  className='material-icons'
+                >delete</button>
+              </div>
+            ): ''}
+            <Like likes={data.likes} postId={id}/>
           </CardHeader>
           <CardBody>
             <h1>{data.message}</h1>
@@ -108,7 +111,6 @@ const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 
   .btn-like {
     background-color: transparent;
@@ -143,23 +145,25 @@ const CardHeader = styled.div`
   }
 
   .admin-section {
+    position: absolute;
+    top: -15px;
+    right: -30px;
     display: flex;
-    right: 0;
+
+
 
     button {
       margin: 0 15px;
+      padding: 10px;
       border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-
-      &:last-of-type {
-        color: #fff;
-        background-color: ${colors.alert};
-      }
+      border-radius: 50%;
+      font-size: 1em;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      color: #fff;
+      background-color: ${colors.alert};
 
       &:hover {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
       }
     }
 
@@ -171,11 +175,12 @@ const CardHeader = styled.div`
       text-decoration: none;
       background-color: ${colors.success};
       color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+      font-size: 1em;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
       
       &:hover {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
       }
     }
   }

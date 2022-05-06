@@ -7,9 +7,9 @@ exports.getAll = (req, res) => {
   Admin.findAll()
     .then((admins) => {
       const msg = 'Admins found';
-      res.status(200).json({ msg, admins });
+      res.json({status: 200, msg, admins });
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
 };
 
 exports.passAdmin = (req, res) => {
@@ -37,24 +37,25 @@ exports.passAdmin = (req, res) => {
               .then(() => {
                 console.log('Success');
               })
-              .catch((err) => res.status(403).json({ err: err.message }));
+              .catch((err) => res.json({status: 403, err: err.message }));
             const msg = 'New Admin was created successfully';
-            res.status(200).json({ msg, data });
+            res.json({status: 200, msg, data });
           })
-          .catch((err) => res.status(400).json({ err: err.message }));
+          .catch((err) => res.json({status: 400, err: err.message }));
       } else {
         const msg = 'Admin as already exists';
-        res.status(401).json({ msg });
+        res.json({status: 401, msg });
       }
     })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    .catch((err) => res.json({status: 500, err: err.message }));
+
 };
 
 exports.deleteAdmin = (req, res) => {
   const id = req.params.id;
 
   Admin.findByPk(id).then((data) => {
-    if (!data) return res.status(404).json({ msg: 'Admin not found' });
+    if (!data) return res.json({status: 404, msg: 'Admin not found' });
 
     const updateAdmin = {
       admin: 0,
@@ -67,8 +68,9 @@ exports.deleteAdmin = (req, res) => {
       where: { id: data.id },
     })
       .then((data) => {
-        res.status(200).json({ msg: 'Admin deleted', data });
+        res.json({status: 200, msg: 'admin deleted', data });
       })
-      .catch((err) => res.status(500).json({ err: err.message }));
+      .catch((err) => res.json({status: 500, err: err.message }));
+
   });
 };

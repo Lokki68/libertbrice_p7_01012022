@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
 import {useSelector} from "react-redux";
 import AdminSection from "../Admin/AdminSection";
 
-export default function CardAnnuaire({ user }) {
+export default function CardAnnuaire({ user, getFunc }) {
   const {infos} = useSelector(state => state.user)
   const [toggle, setToggle] = useState(false);
 
-  console.log(infos)
+useEffect(() => {
+  getFunc()
+}, [toggle])
+
   const toggleModal = () => {
     setToggle(!toggle);
   };
+
 
   return (
     <Container>
@@ -42,7 +46,7 @@ export default function CardAnnuaire({ user }) {
             </button>
             {
               infos.admin && (
-                <AdminSection user={user} />
+                <AdminSection user={user} toggleFunc={toggleModal}/>
               )
             }
 
