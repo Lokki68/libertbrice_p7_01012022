@@ -10,8 +10,11 @@ export default function PostForm() {
 
   const [locationData, setLocationData] = useState();
   const [edit, setEdit] = useState(false);
+  const [/*postPicture,*/ setPostPicture] = useState(null);
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
+
+  console.log (image)
 
   useEffect(() => {
     if (location.state !== null) {
@@ -25,11 +28,12 @@ export default function PostForm() {
   const handleSubmit = () => {
     const userId = localStorage.getItem('groupomania-id');
 
-    const data = {
-      userId: +userId,
-      message,
-      image,
-    };
+    const data = new FormData()
+      data.append('userId', userId);
+      data.append('message', message);
+      data.append('image', image);
+
+
 
     if (!edit) {
       createPost(data).then((res) => {
@@ -44,6 +48,8 @@ export default function PostForm() {
     }
 
   };
+
+
 
   return (
     <Container>
@@ -71,7 +77,8 @@ export default function PostForm() {
             <input
               type='file'
               id='image'
-              onChange={(e) => setImage(e.target.files[0])}
+              accept=".jpg, .jpeg, .png, .gif"
+              onChange={e => setImage(e.target.files[0])}
             />
           </div>
         </FormContent>

@@ -85,7 +85,7 @@ exports.createPost = (req, res, next) => {
   };
 
   if (req.file) {
-    post.image = `./uploads/posts/${req.file.filename}`;
+    post.image = `${req.protocol}://${req.get('host')}/postsImage/${req.file.filename}`;
   }
 
   // Create post
@@ -129,7 +129,7 @@ exports.deletePost = (req, res) => {
         where: { id },
       })
         .then((postDelete) => {
-          if (postDelete == 0)
+          if (postDelete === 0)
             return res.json({status: 404, msg: 'Not Found' });
           res.json({status: 200, msg: 'Post deleted' });
         })

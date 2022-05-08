@@ -63,7 +63,7 @@ export default function PostDetail() {
           <CardBody>
             <h1>{data.message}</h1>
 
-            {data.image && <img src={data.image} alt='content'/>}
+            <img src={data.image} alt="test"/>
 
 
             <Link

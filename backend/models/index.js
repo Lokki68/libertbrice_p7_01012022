@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
 
 sequelize
   .sync()
-  .then(console.log('Connexion sequelize'))
+  .then(() => console.log('Connexion sequelize'))
   .catch((err) => console.log(err));
 
 const db = {};
