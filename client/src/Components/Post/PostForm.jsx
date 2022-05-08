@@ -10,7 +10,6 @@ export default function PostForm() {
 
   const [locationData, setLocationData] = useState();
   const [edit, setEdit] = useState(false);
-  const [/*postPicture,*/ setPostPicture] = useState(null);
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
 

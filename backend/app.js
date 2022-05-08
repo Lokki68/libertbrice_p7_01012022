@@ -14,8 +14,17 @@ const adminRoutes = require('./Routes/admin.routes');
 
 const app = express();
 
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    'allowedHeaders': ['sessionId', 'Content-Type', 'Origin', 'X-Requested-With', 'X-Auth-Token', 'Content', 'Accept', 'Authorization' ],
+    'exposedHeaders': ['sessionId'],
+    'methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+    'preflightContinue': false
+}
+
 app
-  .use (cors ())
+  .use (cors (corsOptions))
   .use ((req, res, next) => {
     res.setHeader ('Access-Control-Allow-Origin', '*');
     res.setHeader (
