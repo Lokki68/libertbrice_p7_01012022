@@ -7,7 +7,7 @@ export default function CardBody({data, id}) {
     const userId = localStorage.getItem('groupomania-id');
 
     return (
-        <CardBody>
+        <CardBodyContainer>
             <h2>{data.message}</h2>
 
             <Link
@@ -19,13 +19,13 @@ export default function CardBody({data, id}) {
             >
                 Nouveau Commentaire
             </Link>
-        </CardBody>
+        </CardBodyContainer>
     );
 }
 
 // ---- Styled
 
-const CardBody = styled.div`
+const CardBodyContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
