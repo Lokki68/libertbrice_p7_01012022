@@ -1,16 +1,16 @@
 import React from 'react';
 import {Link, NavLink, useNavigate} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
-import { colors } from '../../Utils/styles/color';
+import {colors} from '../../Utils/styles/color';
 
-import { VscGlobe } from 'react-icons/vsc';
-import { logoutUserReducer } from '../../Redux/User/userReducer';
+import {VscGlobe} from 'react-icons/vsc';
+import {logoutUserReducer} from '../../Redux/User/userReducer';
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLogged, infos } = useSelector((state) => state.user);
+  const {isLogged, infos} = useSelector((state) => state.user);
 
   const onLogout = () => {
     localStorage.removeItem('groupomania-token');
@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <Container>
       <LogoContainer>
-        <VscGlobe size={25} />
+        <VscGlobe size={25}/>
         <p>Groupomania</p>
       </LogoContainer>
       {isLogged ? (
@@ -53,11 +53,17 @@ export default function Header() {
       {
         isLogged && (
           <IdContainer>
-            <Link
-              to='/admin'
-            >{infos.username}</Link>
-            {infos.admin &&
-              <span className="material-icons">star</span>
+            {infos.admin ? (
+              <div className="adminNav">
+                <Link
+                  to='/admin'
+                >{infos.username}</Link>
+                <span className="material-icons">star</span>
+              </div>) : (
+              <p className="name">
+                {infos.username}
+              </p>
+            )
             }
           </IdContainer>
         )
@@ -150,10 +156,18 @@ const IdContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  a{
-    font-size: 2em;
-    color: #fff;
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
+  font-size: 2rem;
+  color: #fff;
+
+  .adminNav {
+    a{
+      font-size: 2rem;
+      color: #fff;
+    }
+    
+    span{
+      color: #000;
+    }
   }
 `;

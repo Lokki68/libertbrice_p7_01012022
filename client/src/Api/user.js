@@ -6,7 +6,7 @@ export const getAllUsers = () => {
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
 
 export const getUserInfo = (id) => {
@@ -15,17 +15,24 @@ export const getUserInfo = (id) => {
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
 
-export const saveUser = (data) => {
+export const saveUser = data => {
   return axios
     .post(`http://localhost:8080/api/auth/signup`, data)
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
+
+export const deleteUser = id => {
+  return axios
+    .delete(`http://localhost:8080/api/user/${id}`)
+    .then(res => res.data)
+    .catch(err => console.log({err: err.message}))
+}
 
 export const updateUser = (id, data) => {
   return axios
@@ -33,14 +40,14 @@ export const updateUser = (id, data) => {
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
 
 export const updatePictureUser = (id, data) => {
   return axios
     .put(`http://localhost:8080/api/user/upload/${id}`, data)
     .then((res) => res.data)
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
 
 export const loginUser = (data) => {
@@ -49,7 +56,7 @@ export const loginUser = (data) => {
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
 
 export const checkToken = (data) => {
@@ -58,5 +65,5 @@ export const checkToken = (data) => {
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log({ err: err.message }));
+    .catch((err) => console.log({err: err.message}));
 };
