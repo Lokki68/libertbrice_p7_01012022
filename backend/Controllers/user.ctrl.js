@@ -105,7 +105,7 @@ exports.uploadPicture = (req, res) => {
   };
 
   if (req.file) {
-    userImage.image = `./uploads/profil/${req.file.filename}`;
+    userImage.image = `${req.protocol}://${req.get('host')}/profilImage/${req.file.filename}`;
   }
 
   User.findByPk(id)

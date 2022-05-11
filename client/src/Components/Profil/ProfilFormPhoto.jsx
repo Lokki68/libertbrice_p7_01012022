@@ -24,9 +24,8 @@ export default function ProfilFormPhoto() {
   const handleSubmit = () => {
     const id = localStorage.getItem('groupomania-id');
 
-    const data = {
-      image
-    }
+    const data = new FormData()
+    data.append('image', image)
 
 
     updatePictureUser(id, data).then((res) => {
@@ -86,7 +85,7 @@ const Container = styled.div`
 const Formulaire = styled.form`
   position: relative;
   width: 50%;
-  height: 75%;
+  height: 50%;
   margin: 50px auto;
   padding: 20px;
   background: url('../../asset/logo_planete.jpg') no-repeat center/cover;
