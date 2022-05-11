@@ -6,13 +6,15 @@ import { dateParser } from '../../Utils/utils';
 
 export default function PostCard({ post, users }) {
 
-  const posterUserName = users.find((user) => user.id === post.userId).username;
+  const posterUser = users.find((user) => user.id === post.userId);
   const date = dateParser(post.date);
 
   return (
     <Card>
+        <img src={posterUser.image} alt={posterUser.username}/>
       <CardHeader>
-        <span>{posterUserName}</span>
+        <span>{posterUser.username}</span>
+
         <span>{date} </span>
       </CardHeader>
       <h2>{post.message}</h2>
@@ -38,10 +40,21 @@ const Card = styled.div`
   margin: 20px auto;
   background-color: ${colors.primary};
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 
   h2 {
     color: #333;
+  }
+  
+  img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   }
 
   .more-info {

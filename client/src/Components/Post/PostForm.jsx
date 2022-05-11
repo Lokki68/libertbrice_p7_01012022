@@ -13,8 +13,6 @@ export default function PostForm() {
   const [message, setMessage] = useState('');
   const [image, setImage] = useState('');
 
-  console.log (image)
-
   useEffect(() => {
     if (location.state !== null) {
       setLocationData(location.state.data)
@@ -31,8 +29,6 @@ export default function PostForm() {
       data.append('userId', userId);
       data.append('message', message);
       data.append('image', image);
-
-
 
     if (!edit) {
       createPost(data).then((res) => {

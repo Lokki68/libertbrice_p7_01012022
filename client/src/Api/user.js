@@ -38,7 +38,7 @@ export const updateUser = (id, data) => {
 
 export const updatePictureUser = (id, data) => {
   return axios
-    .put(`http://localhost:8080/api/user/${id}`, data)
+    .put(`http://localhost:8080/api/user/upload/${id}`, data)
     .then((res) => res.data)
     .catch((err) => console.log({ err: err.message }));
 };

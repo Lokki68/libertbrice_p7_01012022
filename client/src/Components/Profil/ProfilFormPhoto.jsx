@@ -21,14 +21,16 @@ export default function ProfilFormPhoto() {
     }
   }, [infos]);
 
+  console.log(image)
+
   const handleSubmit = () => {
     const id = localStorage.getItem('groupomania-id');
 
     const data = new FormData()
     data.append('image', image)
 
-
     updatePictureUser(id, data).then((res) => {
+      console.log(res)
       dispatch(loadUserInfosReducer(res.data));
     });
 
