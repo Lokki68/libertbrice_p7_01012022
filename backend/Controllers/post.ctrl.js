@@ -125,6 +125,9 @@ exports.deletePost = (req, res) => {
 
   Post.findByPk(id)
     .then((post) => {
+
+      const filename = post.image.split('/postsImage/')[1];
+      fs.unlink(`postsImage/${filename}`, () => {
       Post.destroy({
         where: { id },
       })
@@ -134,6 +137,8 @@ exports.deletePost = (req, res) => {
           res.json({status: 200, msg: 'Post deleted' });
         })
         .catch((err) => res.json({status: 500, err: err.message }));
+      })
+
     })
     .catch((err) => res.json({status: 500, err: err.message }));
 };

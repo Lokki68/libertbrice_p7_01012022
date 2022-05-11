@@ -1,4 +1,5 @@
 const db = require('../models');
+const fs = require("fs");
 
 const User = db.users;
 const Admin = db.admins;
@@ -82,16 +83,22 @@ exports.deleteUser = (req, res, next) => {
     .then((user) => {
       if (!user) return res.status(404).json({ msg: 'User not found' });
 
-      return User.destroy({
-        where: { id: user.id },
-      })
-        .then(() => {
-          const msg = `User ${user.id} - ${user.username} was deleted`;
+      const filename = user.image.split('/profilImage/')[1];
+      fs.unlink(`profilImage/${filename}`, ()=> {
 
-          res.status(200).json({ msg });
-        })
-        .catch((err) => res.status(400).json({ err: err.message }));
+          User.destroy({
+            where: { id: user.id },
+          })
+            .then(() => {
+              const msg = `User ${user.id} - ${user.username} was deleted`;
+
+              res.status(200).json({ msg });
+            })
+            .catch((err) => res.status(400).json({ err: err.message }));
+
+      })
     })
+
     .catch((err) => res.status(500).json({ err: err.message }));
 };
 
