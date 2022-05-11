@@ -9,6 +9,8 @@ import {colors} from '../../Utils/styles/color';
 import PostDetailSquelette from './PostDetailSquelette';
 import CommentCard from './CommentCard';
 import Like from "../Like/Like";
+import CardBody from "./CardDetail/CardBody";
+import CardBodyImage from "./CardDetail/CardBodyImage";
 
 export default function PostDetail() {
   const navigate = useNavigate();
@@ -60,22 +62,14 @@ export default function PostDetail() {
             ): ''}
             <Like likes={data.likes} postId={id}/>
           </CardHeader>
-          <CardBody>
-            <h1>{data.message}</h1>
+        {
+          !data.image ? (
+              <CardBody data={data} id={id}/>
+          ) : (
+              <CardBodyImage data={data} id={id}/>
 
-            <img src={data.image} alt="test"/>
-
-
-            <Link
-              to={`/post/${id}/commentform`}
-              state={{
-                id, userId,
-
-              }}
-            >
-              Nouveau Commentaire
-            </Link>
-          </CardBody>
+          )
+        }
           {data.comments.length > 0 && (<CardComment>
               <ul>
                 {data.comments.map((comment) => (<li key={comment.id}>
@@ -182,36 +176,6 @@ const CardHeader = styled.div`
       &:hover {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
       }
-    }
-  }
-`;
-
-const CardBody = styled.div`
-  position: relative;
-  width: 80%;
-  height: 300px;
-  margin: 10px auto;
-
-  img {
-    width: 400px;
-    height: 300px;
-  }
-
-  a {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    margin: 10px 15px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    color: #fff;
-    background-color: ${colors.secondary};
-    font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-
-    &:hover {
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
     }
   }
 `;
