@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useLocation, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
-import { /*updatePictureUser, */ updateUser } from '../../Api/user';
+import { updateUser } from '../../Api/user';
 import { loadUserInfosReducer } from '../../Redux/User/userReducer';
 import { colors } from '../../Utils/styles/color';
 import { isEmpty } from '../../Utils/utils';
@@ -33,10 +33,8 @@ export default function AdminProfilForm() {
     };
 
     updateUser(id, data).then((res) => {
-      dispatch(loadUserInfosReducer(res.data));
+      if(res.status === 200) navigate(-1)
     });
-
-    navigate(-1);
   };
 
   return (

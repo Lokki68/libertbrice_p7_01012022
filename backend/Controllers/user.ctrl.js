@@ -68,7 +68,7 @@ exports.updateUser = (req, res, next) => {
           if (!user) return res.status(404).json({ msg: 'User not found' });
 
           const msg = 'User Found';
-          res.status(200).json({ msg, data: user });
+          res.json({status: 200, msg, data: user });
         })
         .catch((err) => res.status(403).json({ err: err.message }));
     })
