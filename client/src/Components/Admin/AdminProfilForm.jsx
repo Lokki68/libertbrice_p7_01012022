@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {useLocation, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import { updateUser } from '../../Api/user';
-import { loadUserInfosReducer } from '../../Redux/User/userReducer';
 import { colors } from '../../Utils/styles/color';
 import { isEmpty } from '../../Utils/utils';
 import AdminProfilFormSquelette from "./AdminProfilFormSquelette";
@@ -11,7 +9,6 @@ import AdminProfilFormSquelette from "./AdminProfilFormSquelette";
 export default function AdminProfilForm() {
   const location = useLocation()
   const {user} = location.state
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState();

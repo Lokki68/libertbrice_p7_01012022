@@ -7,8 +7,7 @@ import { colors } from '../../Utils/styles/color';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorInfoMessage, setErrorInfoMessage] = useState('')
-  const [errorPasswordMessage, setErrorPasswordMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate();
 
   const handleSubmit = () => {
@@ -24,9 +23,9 @@ export default function Login() {
           localStorage.setItem('groupomania-id', res.data.id);
           navigate('/');
         } else if (res.status === 401) {
-          setErrorInfoMessage('Utilisateur non trouvé')
+          setErrorMessage(res.err)
         }else if (res.status === 402) {
-          setErrorPasswordMessage('Mauvais mot de passe')
+          setErrorMessage(res.err)
         }
       })
       .catch((err) => console.log(err));
@@ -52,11 +51,10 @@ export default function Login() {
             required
             value={username}
             onInput={(e) => {
-              setErrorInfoMessage('')
+              setErrorMessage('')
               setUsername(e.target.value)
             }}
           />
-          <span className='error-span'>{errorInfoMessage}</span>
         </div>
 
         <div className='info password'>
@@ -67,11 +65,14 @@ export default function Login() {
             placeholder='Votre mot de passe'
             required
             value={password}
-            onInput={(e) => setPassword(e.target.value)}
+            onInput={(e) => {
+              setErrorMessage('')
+              setPassword(e.target.value)
+            }}
           />
-          <span className='error-span'>{errorPasswordMessage}</span>
 
         </div>
+          <span className='error-span'>{errorMessage}</span>
         <button>Envoyer</button>
       </Formulaire>
     </Container>
@@ -98,7 +99,7 @@ const Formulaire = styled.form`
   flex-direction: column;
   justify-content: space-between;
   
-  .info, .info-password {
+  .info {
     display: flex;
     flex-direction: column;
     align-items: center;

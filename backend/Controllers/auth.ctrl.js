@@ -25,19 +25,14 @@ schemaValidPassword
 
 const maxAge = 3 * 24 * 60 * 60 * 1000; // Token Expiration
 
-// SignUp
 exports.signup = (req, res, next) => {
   const { username, email, password } = req.body;
 
-  // Check PassWord
 
   if (!schemaValidPassword.validate(password)) {
-    return res.status(403).json({ error: 'Password Security No Conform' });
+    return res.json({status: 401, err: 'Mot de passe non conforme' });
   }
 
-  // Create New User
-
-  // Hash Password
   bcrypt
     .hash(password, 10)
     .then((hash) => {
@@ -52,7 +47,7 @@ exports.signup = (req, res, next) => {
           const msg = 'User Created';
           res.json({ status: 200, msg });
         })
-        .catch((err) => res.json({ status: 400, err: err.message }));
+        .catch((err) => res.json({ status: 400, err: 'Utilisateur déjà enregistré, ou email non conforme' }));
     })
 
     .catch((err) => res.json({ status: 500, err: err.message }));
@@ -66,22 +61,17 @@ exports.login = (req, res) => {
     where: { username: username },
   })
     .then((user) => {
-      // No User found
 
       if (!user[0]) {
-        return res.json({status: 401, err: 'User not found' });
+        return res.json({status: 401, err: 'Utilisateur non trouvé' });
       }
 
-      // Check Password
       bcrypt
         .compare(password, user[0].password)
         .then((valid) => {
-          // If no good password
           if (!valid) {
-            return res.json({status: 402, err: 'Password no good' });
+            return res.json({status: 402, err: 'Mauvais mot de passe' });
           }
-
-          // Password Ok
 
           res.json({
             status: 200,
@@ -95,8 +85,6 @@ exports.login = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err: err.message }));
 };
-
-//verifToken
 
 exports.verifToken = (req, res) => {
   const { id, token } = req.body;

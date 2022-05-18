@@ -11,6 +11,9 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [errorMessage, setErrorMessage] = useState('')
+
+
   const onSubmitForm = () => {
     const data = {
       username,
@@ -19,7 +22,14 @@ export default function Register() {
     };
 
     saveUser(data).then((res) => {
-      if (res.status === 200) return navigate('/login');
+      if (res.status === 200) {
+        navigate('/login')
+      } else if (res.status === 400) {
+        setErrorMessage(res.err)
+      } else if (res.status === 401){
+        setErrorMessage(res.err)
+      }
+
     });
   };
 
@@ -64,6 +74,7 @@ export default function Register() {
             onInput={(e) => setPassword(e.target.value)}
           />
         </div>
+        <span className='error-span' >{errorMessage}</span>
         <button>Envoyer</button>
       </Formulaire>
     </Container>
@@ -90,6 +101,12 @@ const Formulaire = styled.form`
   flex-direction: column;
   justify-content: space-between;
 
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .info input {
     outline: none;
     border: none;
@@ -99,6 +116,11 @@ const Formulaire = styled.form`
 
   .info.password input {
     margin-top: 15px;
+  }
+  
+  .error-span {
+    margin-top: 5px;
+    color: ${colors.alert};
   }
 
   button {
