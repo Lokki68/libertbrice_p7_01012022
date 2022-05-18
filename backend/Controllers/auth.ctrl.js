@@ -69,7 +69,7 @@ exports.login = (req, res) => {
       // No User found
 
       if (!user[0]) {
-        return res.status(404).json({ err: 'User not found' });
+        return res.json({status: 401, err: 'User not found' });
       }
 
       // Check Password
@@ -78,7 +78,7 @@ exports.login = (req, res) => {
         .then((valid) => {
           // If no good password
           if (!valid) {
-            return res.status(404).json({ err: 'Password no good' });
+            return res.json({status: 402, err: 'Password no good' });
           }
 
           // Password Ok
