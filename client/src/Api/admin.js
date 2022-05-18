@@ -1,16 +1,17 @@
 import axios from "axios";
+import {environnement} from "../environnements/environnement";
 
 
 export const deleteAdmin = id => {
   return axios
-    .delete(`http://localhost:8080/api/admin/${id}`)
+    .delete(`${environnement.apiUrl}/admin/${id}`)
     .then(res => res.data)
     .catch(err => console.log({err: err.message}))
 }
 
 export const saveAdmin = (id, data) => {
   return axios
-    .post(`http://localhost:8080/api/admin/${id}`, data)
+    .post(`${environnement.apiUrl}/admin/${id}`, data)
     .then(res => res.data)
     .catch(err => console.log({err: err.message}))
 }

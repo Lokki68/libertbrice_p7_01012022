@@ -1,8 +1,9 @@
 import axios from 'axios';
+import {environnement} from "../environnements/environnement";
 
 export const getAllPosts = () => {
   return axios
-    .get('http://localhost:8080/api/post')
+    .get(`${environnement.apiUrl}/post`)
     .then((res) => {
       return res.data;
     })
@@ -11,7 +12,7 @@ export const getAllPosts = () => {
 
 export const getOnePost = (id) => {
   return axios
-    .get(`http://localhost:8080/api/post/${id}`)
+    .get(`${environnement.apiUrl}/post/${id}`)
     .then((res) => {
       return res;
     })
@@ -20,21 +21,21 @@ export const getOnePost = (id) => {
 
 export const createPost = (data) => {
   return axios
-    .post('http://localhost:8080/api/post', data)
+    .post(`${environnement.apiUrl}/post`, data)
     .then((res) => res.data)
     .catch((err) => console.log({ err: err.message }));
 };
 
 export const updatePost = (data, id) => {
   return axios
-    .put(`http://localhost:8080/api/post/${id}`, data)
+    .put(`${environnement.apiUrl}/post/${id}`, data)
     .then( res => res.data)
     .catch(err => console.log({err: err.message}))
 }
 
 export const deletePost = (id) => {
   return axios
-    .delete(`http://localhost:8080/api/post/${id}`)
+    .delete(`${environnement.apiUrl}/post/${id}`)
     .then((res) => {
       return res;
     })
