@@ -40,7 +40,7 @@ export default function Posts() {
 // ----- Styled
 
 const Container = styled.div`
-  margin: 50px 0;
+  margin: auto 0;
   position: relative;
   height: 85%;
   background-color: rgba(255, 255, 255, 0.2);

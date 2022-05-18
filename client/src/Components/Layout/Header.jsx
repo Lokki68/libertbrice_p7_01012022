@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link, NavLink, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
@@ -6,11 +6,14 @@ import {colors} from '../../Utils/styles/color';
 
 import {VscGlobe} from 'react-icons/vsc';
 import {logoutUserReducer} from '../../Redux/User/userReducer';
+import {GiHamburgerMenu} from "react-icons/gi";
+import Menu from "./Menu";
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {isLogged, infos} = useSelector((state) => state.user);
+  const [navMenu, setNavMenu] = useState(false);
 
   const onLogout = () => {
     localStorage.removeItem('groupomania-token');
@@ -19,12 +22,21 @@ export default function Header() {
     navigate('/login');
   };
 
+  const toggleNavMenu = () => {
+    setNavMenu(!navMenu)
+  }
+
   return (
     <Container>
       <LogoContainer>
         <VscGlobe size={25}/>
         <p>Groupomania</p>
       </LogoContainer>
+      <BurgerNavigation >
+        <button className='burgerBtn' onClick={() => toggleNavMenu()} ><GiHamburgerMenu size={20} /></button>
+      </BurgerNavigation>
+      {navMenu && <Menu toggleFunc={toggleNavMenu} decoFunc={onLogout} />}
+
       {isLogged ? (
         <NavMainContainer>
           <NavLink to='/' className='btn'>
@@ -75,6 +87,7 @@ export default function Header() {
 // ----- Styled
 
 const Container = styled.header`
+  position: relative;
   height: 90px;
   width: 100%;
   background-color: ${colors.tertiary};
@@ -112,10 +125,16 @@ const Container = styled.header`
     }
   }
 
-  @media (min-width: 815px) {
+  @media (min-width: 1090px) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 90px;
     grid-template-areas: 'logo nav deconnect';
+  }
+  
+  @media (max-width: 735px){
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 `;
 
@@ -138,11 +157,34 @@ const LogoContainer = styled.div`
   }
 `;
 
+const BurgerNavigation = styled.div`
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  
+  .burgerBtn {
+    border: none;
+    background: ${colors.secondary};
+    border-radius: 5px;
+    box-shadow: 2px 4px 6px rgba(0,0,0,.6);
+
+  }
+  
+  @media screen and (min-width: 735px){
+    display: none;
+  }
+`;
+
 const NavMainContainer = styled.nav`
   grid-area: nav;
   display: flex;
   justify-content: center;
   align-items: center;
+
+
+  @media screen and (max-width: 735px ) {
+    display: none;
+  }
 `;
 
 const NavConnectContainer = styled.nav`
@@ -153,12 +195,23 @@ const NavConnectContainer = styled.nav`
 `;
 
 const IdContainer = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Roboto, sans-serif;
   font-size: 2rem;
   color: #fff;
+  
+  @media screen and (min-width: 735px){
+    bottom: 50%;    
+    right: 10px;
+  }
+
+
+
 
   .adminNav {
     a{

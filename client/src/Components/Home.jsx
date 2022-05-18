@@ -8,14 +8,11 @@ import Posts from './Post/Posts';
 import { getAllPosts } from '../Api/posts';
 import { getAllPostsReducer } from '../Redux/Posts/postsReducer';
 import { colors } from '../Utils/styles/color';
-import {GiHamburgerMenu} from "react-icons/gi";
-import Menu from "./Layout/Menu";
 
 
 export default function Home() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [menu, setMenu] = useState(true);
 
   useEffect(() => {
     getAllUsers().then((res) => {
@@ -28,14 +25,9 @@ export default function Home() {
     });
   }, []);
 
-  const toggleMenu = () => setMenu(!menu);
 
   return (
     <Container>
-      <button className='new-post' onClick={() => toggleMenu()}>
-        <GiHamburgerMenu />
-      </button>
-      {menu && <Menu toggleFunc={toggleMenu} />}
 
       {!isLoaded ? (
         <div>

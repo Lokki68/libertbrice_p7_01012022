@@ -86,13 +86,14 @@ const Container = styled.div`
   height: calc(100vh - 90px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
 `;
 
 const Content = styled.div`
   position: relative;
-  height: 85%;
+  margin: auto 0;
+  height: 750px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
@@ -182,7 +183,7 @@ const CardHeader = styled.div`
 
 const CardComment = styled.div`
   width: 100%;
-  height: 342px;
+  height: 200px;
   border-radius: 0 0 10px 10px;
   box-shadow: inset 0px 8px 10px rgba(0, 0, 0, 0.6);
 
