@@ -92,7 +92,7 @@ const Formulaire = styled.form`
   margin: 50px auto;
   padding: 20px;
   background: url('../../asset/logo_planete.jpg') no-repeat center/cover;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
 
   display: flex;

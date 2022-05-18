@@ -8,10 +8,14 @@ import Posts from './Post/Posts';
 import { getAllPosts } from '../Api/posts';
 import { getAllPostsReducer } from '../Redux/Posts/postsReducer';
 import { colors } from '../Utils/styles/color';
+import {GiHamburgerMenu} from "react-icons/gi";
+import Menu from "./Layout/Menu";
+
 
 export default function Home() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [menu, setMenu] = useState(true);
 
   useEffect(() => {
     getAllUsers().then((res) => {
@@ -24,8 +28,15 @@ export default function Home() {
     });
   }, []);
 
+  const toggleMenu = () => setMenu(!menu);
+
   return (
     <Container>
+      <button className='new-post' onClick={() => toggleMenu()}>
+        <GiHamburgerMenu />
+      </button>
+      {menu && <Menu toggleFunc={toggleMenu} />}
+
       {!isLoaded ? (
         <div>
           <VscGlobe size={50} color={'white'} />
@@ -41,9 +52,11 @@ export default function Home() {
 // ----- Styled
 
 const Container = styled.div`
+  position: relative;
   height: calc(100vh - 90px);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   background: url('../img/photo_entreprise.jpg') no-repeat center/cover;
 
@@ -54,12 +67,12 @@ const Container = styled.div`
   }
 
   .new-post {
+    position: absolute;
+    top: 5px;
+    right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    width: 200px;
-    margin: 0 10px;
     background-color: ${colors.primary};
     border-radius: 5px;
     color: #333;

@@ -33,19 +33,23 @@ const CardBodyImageContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 80%;
+  width: 95%;
   height: 400px;
   margin: 20px auto;
   padding: 40px 0;
 
   h2 {
+    width: 30%;
     margin: 0 auto;
   }
 
   img {
-    width: 400px;
+    width: 450px;
     height: 300px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+
   }
 
   a {
@@ -59,10 +63,10 @@ const CardBodyImageContainer = styled.div`
     color: #fff;
     background-color: ${colors.secondary};
     font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
     &:hover {
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     }
   }
 `;

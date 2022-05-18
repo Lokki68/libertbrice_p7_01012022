@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { getAllPosts } from '../../Api/posts';
 import { getAllPostsReducer } from '../../Redux/Posts/postsReducer';
@@ -21,9 +20,6 @@ export default function Posts() {
 
   return (
     <Fragment>
-      <NavLink to='/postform' className='new-post'>
-        Nouveau post
-      </NavLink>
       <Container>
         {!isEmpty(data) ? (
           <Content>
@@ -44,6 +40,7 @@ export default function Posts() {
 // ----- Styled
 
 const Container = styled.div`
+  margin: 50px 0;
   position: relative;
   height: 85%;
   background-color: rgba(255, 255, 255, 0.2);

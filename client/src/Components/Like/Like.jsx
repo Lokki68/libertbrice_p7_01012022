@@ -12,7 +12,6 @@ export default function Like({likes, postId}) {
     if (likes !== null || likes.length >= 1 ){
       const result = likes.filter(like => like.userId === +user_id)
 
-      console.log(result)
       if(result.length >=1){
         setUserLikeId(result[0].id)
         setIsLiked(true)
@@ -22,7 +21,6 @@ export default function Like({likes, postId}) {
     }
   }, [])
 
-  console.log(userLikeId)
 
   const handleLike = () => {
     const dataLike = {
@@ -31,12 +29,6 @@ export default function Like({likes, postId}) {
     }
 
     const id = userLikeId;
-
-
-
-
-    console.log('Like', dataLike)
-    console.log('DisLike', id)
 
     if (!isLiked) {
       createLike(dataLike)

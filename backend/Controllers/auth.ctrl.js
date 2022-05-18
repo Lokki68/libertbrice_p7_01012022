@@ -25,7 +25,7 @@ schemaValidPassword
 
 const maxAge = 3 * 24 * 60 * 60 * 1000; // Token Expiration
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
   const { username, email, password } = req.body;
 
 
@@ -47,7 +47,7 @@ exports.signup = (req, res, next) => {
           const msg = 'User Created';
           res.json({ status: 200, msg });
         })
-        .catch((err) => res.json({ status: 400, err: 'Utilisateur déjà enregistré, ou email non conforme' }));
+        .catch(() => res.json({ status: 400, err: 'Utilisateur déjà enregistré, ou email non conforme' }));
     })
 
     .catch((err) => res.json({ status: 500, err: err.message }));
@@ -97,7 +97,7 @@ exports.verifToken = (req, res) => {
       .then((user) => {
         res.json({ status: 200, data: user[0], msg: 'user found' });
       })
-      .catch((err) => res.json({ status: 404, msg: 'User not found' }));
+      .catch(() => res.json({ status: 404, msg: 'User not found' }));
   } else {
     res.json({ status: 500, msg: 'Error' });
   }
