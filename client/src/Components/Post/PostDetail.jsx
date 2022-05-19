@@ -93,7 +93,7 @@ const Container = styled.div`
 const Content = styled.div`
   position: relative;
   margin: auto 0;
-  height: 750px;
+  height: 90%;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
@@ -183,25 +183,16 @@ const CardHeader = styled.div`
 
 const CardComment = styled.div`
   width: 100%;
-  height: 200px;
+  height: auto;
   border-radius: 0 0 10px 10px;
   box-shadow: inset 0px 8px 10px rgba(0, 0, 0, 0.6);
 
   overflow-y: scroll;
 
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-  }
-
   &::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: ${colors.secondary};
   }
-
-  &::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: ${colors.tertiary};
-    border-radius: 10px;
 
     &:hover {
       background-color: ${colors.secondary};

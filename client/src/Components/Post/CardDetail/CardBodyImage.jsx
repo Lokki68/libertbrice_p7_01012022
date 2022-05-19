@@ -32,20 +32,28 @@ export default function CardBodyImage({data, id}) {
 const CardBodyImageContainer = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 95%;
-  height: 400px;
+  height: auto;
   margin: 20px auto;
   padding: 40px 0;
+  
+ 
 
   h2 {
-    width: 30%;
-    margin: 0 auto;
+    width: 90%;
+    margin: 10px auto;
+    font-weight: normal;
+    font-size: 1rem;
+
+    
   }
 
   img {
-    width: 450px;
-    height: 300px;
+    max-width: 400px;
+    width: 70%;
+    aspect-ratio: 16/9;
     object-fit: cover;
     border-radius: 3px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
@@ -63,10 +71,21 @@ const CardBodyImageContainer = styled.div`
     color: #fff;
     background-color: ${colors.secondary};
     font-weight: bold;
+    font-size: .5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
     &:hover {
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  @media (min-width: 735px) {
+    h2{
+      font-size: 1.5rem;
+    }
+    
+    a {
+      font-size: .8rem;
     }
   }
 `;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
-import { dateParser } from '../../Utils/utils';
+import {dateParser, timeAgo} from '../../Utils/utils';
 import {Link, useNavigate} from "react-router-dom";
 
 export default function CommentCard({ data, users }) {
@@ -27,7 +27,7 @@ export default function CommentCard({ data, users }) {
       <Comment>
         <InfoComment>
           <span>{posterUserName}</span>
-          <span>{dateParser(data.createdAt)}</span>
+          <span className='info-date'>{timeAgo(data.createdAt)}</span>
         </InfoComment>
         <ContentComment>
           <p>{data.content}</p>
@@ -80,6 +80,10 @@ const InfoComment = styled.div`
   flex-direction: column;
   margin: auto 0;
   color: ${colors.tertiary};
+  
+  .info-date {
+    font-size: .5rem;
+  }
 `;
 
 const ContentComment = styled.div`

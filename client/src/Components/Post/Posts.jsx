@@ -43,7 +43,7 @@ const Container = styled.div`
   margin: auto 0;
   position: relative;
   height: 85%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 0, 0.2);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   aspect-ratio: 16/9;
@@ -57,7 +57,7 @@ const Container = styled.div`
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: ${colors.secondary};
+    background-color: ${colors.primary};
   }
 
   &::-webkit-scrollbar-thumb {

@@ -2,12 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../Utils/styles/color';
-import { dateParser } from '../../Utils/utils';
+import { timeAgo} from '../../Utils/utils';
 
 export default function PostCard({ post, users }) {
 
   const posterUser = users.find((user) => user.id === post.userId);
-  const date = dateParser(post.date);
+  const date = timeAgo(post.date);
 
   return (
     <Card>
