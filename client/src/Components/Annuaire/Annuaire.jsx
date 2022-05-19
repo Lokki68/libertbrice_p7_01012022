@@ -76,17 +76,22 @@ const Container = styled.div`
   padding-top: 10px;
   height: calc(100vh - 90px);
   background: url('../../img/photo_entreprise.jpg') no-repeat center/cover;
+  overflow: hidden;
 `;
 
 const SearchBar = styled.div`
   position: relative;
   margin: 0px auto;
   padding: 0 15px;
-  width: 30%;
+  width: 90%;
   border-radius: 5px;
   background: ${colors.primary};
   text-align: left;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+  
+  @media (min-width: 735px) {
+    width: 50%;
+  }
 
   label {
     position: absolute;
@@ -110,4 +115,13 @@ const Content = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 auto;  
+  width: 90%;
+  height: 90%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar-track {
+    background-color: ${colors.secondary};
+  }
 `;
