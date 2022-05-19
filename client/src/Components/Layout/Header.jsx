@@ -131,7 +131,7 @@ const Container = styled.header`
     grid-template-areas: 'logo nav deconnect';
   }
   
-  @media (max-width: 735px){
+  @media (max-width: 734px){
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -177,13 +177,13 @@ const BurgerNavigation = styled.div`
 
 const NavMainContainer = styled.nav`
   grid-area: nav;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 
 
-  @media screen and (max-width: 735px ) {
-    display: none;
+  @media screen and (min-width: 735px ) {
+    display: flex;
   }
 `;
 

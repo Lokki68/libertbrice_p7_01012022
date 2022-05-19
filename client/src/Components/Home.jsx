@@ -8,11 +8,14 @@ import Posts from './Post/Posts';
 import { getAllPosts } from '../Api/posts';
 import { getAllPostsReducer } from '../Redux/Posts/postsReducer';
 import { colors } from '../Utils/styles/color';
+import {FaPen} from "react-icons/fa";
+import {useNavigate} from "react-router-dom";
 
 
 export default function Home() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllUsers().then((res) => {
@@ -28,7 +31,9 @@ export default function Home() {
 
   return (
     <Container>
-
+      <button className='new-post' onClick={ () => navigate('/postform')} >
+        <FaPen size={20} />
+      </button>
       {!isLoaded ? (
         <div>
           <VscGlobe size={50} color={'white'} />
@@ -59,10 +64,10 @@ const Container = styled.div`
   }
 
   .new-post {
+    display: none;
     position: absolute;
     top: 5px;
     right: 10px;
-    display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${colors.primary};
@@ -71,6 +76,10 @@ const Container = styled.div`
     font-weight: bold;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
     z-index: 100;
+    
+    @media (min-width: 735px) {
+      display: flex;
+    }
 
     &:hover {
       box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
